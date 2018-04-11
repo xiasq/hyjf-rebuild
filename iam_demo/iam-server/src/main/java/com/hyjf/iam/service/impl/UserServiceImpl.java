@@ -1,5 +1,6 @@
 package com.hyjf.iam.service.impl;
 
+import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.request.UserRequest;
 import com.hyjf.com.vo.UserVO;
 import com.hyjf.iam.exception.ServiceException;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService{
 	private UserMapper userMapper;
 
     @Override
-    public User register(UserRequest userRequest) throws ServiceException {
+    public User register(RegisterUserRequest userRequest) throws ServiceException {
         User user = new User();
         userMapper.insert(user);
         return user;

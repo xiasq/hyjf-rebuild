@@ -3,6 +3,7 @@ package com.hyjf.controller;
 import com.hyjf.result.BaseResultBean;
 import com.hyjf.service.UserService;
 import com.hyjf.vo.RegisterVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

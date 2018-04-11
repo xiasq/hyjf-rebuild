@@ -1,6 +1,7 @@
 package com.hyjf.iam.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.request.UserRequest;
 import com.hyjf.com.response.UserResponse;
 import com.hyjf.com.vo.UserVO;
@@ -31,12 +32,13 @@ import javax.validation.Valid;
 @RequestMapping("/iam/user")
 public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping("/register")
 	public UserResponse register(HttpServletRequest request, HttpServletResponse response,
-			@RequestBody @Valid UserRequest userRequest) {
+			@RequestBody @Valid RegisterUserRequest userRequest) {
 		logger.info("user register:" + JSONObject.toJSONString(userRequest));
 		UserResponse userResponse = new UserResponse();
 		try {

@@ -7,4 +7,5 @@ import com.hyjf.vo.RegisterVO; /**
  */
 public interface UserService {
     void register(RegisterVO registerVO) throws ReturnMessageException;
+    boolean existUser(String mobile);
 }
