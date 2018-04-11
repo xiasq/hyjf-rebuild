@@ -28,18 +28,18 @@
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="${modelTargetPackage}"
-                            targetProject="${modeltargetProject}">
+                            targetProject="${targetProject}">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="${xmlTargetPackage}"
-                         targetProject="${xmltargetProject}">
+                         targetProject="${targetProject}">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="${mapperTargetPackage}"
-                             targetProject="${mappertargetProject}">
+                             targetProject="${targetProject}">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
