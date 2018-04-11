@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: BATCH
+      
+server:
+  port: 8099
+  jsp-servlet:
+    class-name: org.apache.jasper.servlet.JspServlet
+    
+logging:
+  file: batch.log

@@ -1,0 +1,10 @@
+eureka 1111
+configServer  2222
+
+cs-bi  8081
+bi     8082
+iam    8083
+cp     8084
+cs-bi  8085
+
+batch: 8099

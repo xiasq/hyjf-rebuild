@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyjf.iam.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.hyjf.iam.pojo.User" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="CHAR" />
+        <result column="mobile" property="mobile" jdbcType="CHAR" />
+        <result column="email" property="email" jdbcType="CHAR" />
+        <result column="password" property="password" jdbcType="CHAR" />
+        <result column="paypassword" property="paypassword" jdbcType="CHAR" />
+        <result column="referrer" property="referrer" jdbcType="INTEGER" />
+        <result column="salt" property="salt" jdbcType="CHAR" />
+        <result column="logintime" property="logintime" jdbcType="INTEGER" />
+        <result column="reg_ip" property="regIp" jdbcType="CHAR" />
+        <result column="reg_time" property="regTime" jdbcType="INTEGER" />
+        <result column="login_ip" property="loginIp" jdbcType="CHAR" />
+        <result column="login_time" property="loginTime" jdbcType="INTEGER" />
+        <result column="last_ip" property="lastIp" jdbcType="CHAR" />
+        <result column="last_time" property="lastTime" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="open_account" property="openAccount" jdbcType="TINYINT" />
+        <result column="borrow_sms" property="borrowSms" jdbcType="INTEGER" />
+        <result column="recharge_sms" property="rechargeSms" jdbcType="TINYINT" />
+        <result column="withdraw_sms" property="withdrawSms" jdbcType="TINYINT" />
+        <result column="is_smtp" property="isSmtp" jdbcType="TINYINT" />
+        <result column="if_receive_notice" property="ifReceiveNotice" jdbcType="INTEGER" />
+        <result column="iconUrl" property="iconurl" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="DECIMAL" />
+        <result column="invest_sms" property="investSms" jdbcType="TINYINT" />
+        <result column="recieve_sms" property="recieveSms" jdbcType="TINYINT" />
+        <result column="reg_esb" property="regEsb" jdbcType="TINYINT" />
+        <result column="eprovince" property="eprovince" jdbcType="VARCHAR" />
+        <result column="send_sms" property="sendSms" jdbcType="TINYINT" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="usernamep" property="usernamep" jdbcType="VARCHAR" />
+        <result column="is_inst_flag" property="isInstFlag" jdbcType="TINYINT" />
+        <result column="inst_code" property="instCode" jdbcType="VARCHAR" />
+        <result column="ptype" property="ptype" jdbcType="TINYINT" />
+        <result column="account_esb" property="accountEsb" jdbcType="TINYINT" />
+        <result column="referrer_user_name" property="referrerUserName" jdbcType="VARCHAR" />
+        <result column="investFlag" property="investflag" jdbcType="TINYINT" />
+        <result column="user_type" property="userType" jdbcType="TINYINT" />
+        <result column="auth_type" property="authType" jdbcType="INTEGER" />
+        <result column="auth_status" property="authStatus" jdbcType="INTEGER" />
+        <result column="auth_time" property="authTime" jdbcType="TIMESTAMP" />
+        <result column="recod_total" property="recodTotal" jdbcType="INTEGER" />
+        <result column="recod_time" property="recodTime" jdbcType="TIMESTAMP" />
+        <result column="recod_truncate_time" property="recodTruncateTime" jdbcType="TIMESTAMP" />
+        <result column="is_set_password" property="isSetPassword" jdbcType="TINYINT" />
+        <result column="bank_open_account" property="bankOpenAccount" jdbcType="TINYINT" />
+        <result column="bank_account_esb" property="bankAccountEsb" jdbcType="TINYINT" />
+        <result column="is_data_update" property="isDataUpdate" jdbcType="TINYINT" />
+        <result column="is_evaluation_flag" property="isEvaluationFlag" jdbcType="TINYINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        user_id, username, mobile, email, `password`, paypassword, referrer, salt, logintime,
+        reg_ip, reg_time, login_ip, login_time, last_ip, last_time, `status`, open_account,
+        borrow_sms, recharge_sms, withdraw_sms, is_smtp, if_receive_notice, iconUrl, version,
+        invest_sms, recieve_sms, reg_esb, eprovince, send_sms, pid, usernamep, is_inst_flag,
+        inst_code, ptype, account_esb, referrer_user_name, investFlag, user_type, auth_type,
+        auth_status, auth_time, recod_total, recod_time, recod_truncate_time, is_set_password,
+        bank_open_account, bank_account_esb, is_data_update, is_evaluation_flag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from huiyingdai_users
+        where user_id = #{id}
+    </select>
+
+</mapper>

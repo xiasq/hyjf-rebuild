@@ -1,0 +1,22 @@
+# github管理配置
+spring:
+  application:
+      name: CONFIG_SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@gitlab.com:xiasq/config_files.git
+          #searchPaths: 配置仓库路径下的相对搜索位置，可以配置多个
+          username: mx2012xshq@126.com
+          password: abcd1234
+
+server:
+  port: 2222
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@127.0.0.1:1111/eureka/
+  instance:
+    preferIpAddress: true
