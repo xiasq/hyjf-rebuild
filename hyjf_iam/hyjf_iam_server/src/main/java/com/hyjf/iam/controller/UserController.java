@@ -2,10 +2,16 @@ package com.hyjf.iam.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.request.RegisterUserRequest;
+import com.hyjf.com.request.SmsCodeRequest;
+import com.hyjf.com.response.AccountResponse;
+import com.hyjf.com.response.SmsCodeResponse;
 import com.hyjf.com.response.UserResponse;
+import com.hyjf.com.vo.AccountVO;
 import com.hyjf.com.vo.UserVO;
 import com.hyjf.common.exception.ServiceException;
+import com.hyjf.iam.dao.model.auto.Account;
 import com.hyjf.iam.dao.model.auto.Users;
+import com.hyjf.iam.service.SmsService;
 import com.hyjf.iam.service.UserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -34,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private SmsService smsService;
 
 	@RequestMapping("/register")
 	public UserResponse register(HttpServletRequest request, HttpServletResponse response,
@@ -82,5 +91,91 @@ public class UserController {
 			response.setResult(userVO);
 		}
 		return response;
+	}
+
+	/**
+	 * 根据userId查找account
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/findAccountByUserId/{userId}")
+	public AccountResponse findAccountByUserId(@PathVariable int userId) {
+		AccountResponse response = new AccountResponse();
+		Account account = userService.findAccountByUserId(userId);
+		if (account != null) {
+			AccountVO accountVO = new AccountVO();
+			BeanUtils.copyProperties(account, accountVO);
+			response.setResult(accountVO);
+		}
+		return response;
+	}
+
+	/**
+	 * 根据mobile查找用户
+	 * @param mobile
+	 * @return
+	 */
+	@RequestMapping("/findUserByMobile/{mobile}")
+	public UserResponse findUserByMobile(@PathVariable String mobile) {
+		UserResponse response = new UserResponse();
+		Users user = userService.findUserByMobile(mobile);
+		if (user != null) {
+			UserVO userVO = new UserVO();
+			BeanUtils.copyProperties(user, userVO);
+			response.setResult(userVO);
+		}
+		return response;
+	}
+
+	/**
+	 * 检查短信验证码
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/updateCheckMobileCode")
+	public int updateCheckMobileCode(SmsCodeRequest request) {
+
+		String mobile = request.getMobile();
+		String verificationCode = request.getVerificationCode();
+		String verificationType = request.getVerificationType();
+		String platform = request.getPlatform();
+		Integer status = request.getStatus();
+		Integer updateStatus = request.getUpdateStatus();
+		int result = smsService.updateCheckMobileCode(mobile, verificationCode, verificationType, platform, status, updateStatus);
+		return result;
+	}
+
+	/**
+	 * 根据推荐人手机号或userId查询推荐人
+	 * @param reffer
+	 * @return
+	 */
+	@RequestMapping("/findUserByRecommendName/{reffer}")
+	public UserResponse findUserByRecommendName(@PathVariable String reffer) {
+		UserResponse response = new UserResponse();
+		Users user = userService.findUserByRecommendName(reffer);
+		if (user != null) {
+			UserVO userVO = new UserVO();
+			BeanUtils.copyProperties(user, userVO);
+			response.setResult(userVO);
+		}
+		return response;
+	}
+
+	/**
+	 * 保存验证码
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/saveSmsCode")
+	public int saveSmsCode(SmsCodeRequest request) {
+		//String mobile, String verificationCode, String verificationType, Integer status, String platform
+		String mobile = request.getMobile();
+		String verificationCode = request.getVerificationCode();
+		String verificationType = request.getVerificationType();
+		String platform = request.getPlatform();
+		Integer status = request.getStatus();
+		int result = smsService.saveSmsCode(mobile, verificationCode, verificationType, status, platform);
+		return result;
 	}
 }
