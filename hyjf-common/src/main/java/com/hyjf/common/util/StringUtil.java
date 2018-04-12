@@ -1,4 +1,4 @@
-package com.hyjf.iam.util;
+package com.hyjf.common.util;
 
 import java.util.*;
 import java.util.regex.Matcher;

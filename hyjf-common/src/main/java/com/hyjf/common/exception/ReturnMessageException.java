@@ -1,16 +1,16 @@
-package com.hyjf.cs.iam.exception;
+package com.hyjf.common.exception;
 
-import com.hyjf.cs.iam.constants.ErrorCode;
+import com.hyjf.common.constants.ErrorCode;
 
 /**
  * @author xiasq
- * @version ReturnMessageException, v0.1 2018/4/11 9:40
+ * @version ReturnMessageException, v0.1 2018/1/21 22:22
  */
 public class ReturnMessageException extends RuntimeException {
+
 	private ErrorCode error;
 
 	public ReturnMessageException(ErrorCode error) {
-		this(error.getMessage());
 		this.error = error;
 	}
 

@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.response.UserResponse;
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.dao.model.auto.Users;
-import com.hyjf.iam.exception.ServiceException;
-import com.hyjf.iam.pojo.User;
+import com.hyjf.common.exception.ServiceException;
+import com.hyjf.iam.dao.model.auto.Users;
 import com.hyjf.iam.service.UserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -42,7 +41,7 @@ public class UserController {
 		logger.info("user register:" + JSONObject.toJSONString(userRequest));
 		UserResponse userResponse = new UserResponse();
 		try {
-			com.hyjf.dao.model.auto.Users user = userService.register(userRequest);
+			Users user = userService.register(userRequest);
 			if (user == null) {
 				userResponse.setRtn(UserResponse.USER_EXISTS);
 				userResponse.setMessage(UserResponse.USER_EXISTS_MSG);

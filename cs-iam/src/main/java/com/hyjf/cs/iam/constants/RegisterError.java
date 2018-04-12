@@ -1,5 +1,7 @@
 package com.hyjf.cs.iam.constants;
 
+import com.hyjf.common.constants.ErrorCode;
+
 /**
  * @author xiasq
  * @version RegisterError, v0.1 2018/4/11 9:43

@@ -1,7 +1,7 @@
 package com.hyjf.cs.iam.service;
 
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.cs.iam.exception.ReturnMessageException;
+import com.hyjf.common.exception.ReturnMessageException;
 import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**

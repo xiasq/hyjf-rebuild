@@ -1,4 +1,4 @@
-package com.hyjf.iam.exception;
+package com.hyjf.common.exception;
 
 /**
  * @author xiasq

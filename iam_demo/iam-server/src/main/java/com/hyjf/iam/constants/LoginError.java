@@ -1,5 +1,7 @@
 package com.hyjf.iam.constants;
 
+import com.hyjf.common.constants.ErrorCode;
+
 /**
  * @author xiasq
  * @version LoginError, v0.1 2018/1/21 22:26

@@ -1,23 +1,24 @@
 package com.hyjf.iam.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.dao.mapper.auto.*;
-import com.hyjf.dao.model.auto.*;
-import com.hyjf.iam.exception.ServiceException;
-import com.hyjf.iam.service.UserService;
-import com.hyjf.iam.util.GetCode;
-import com.hyjf.iam.util.GetDate;
-import com.hyjf.iam.util.MD5Utils;
-import com.hyjf.iam.util.Validator;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.alibaba.fastjson.JSON;
+import com.hyjf.com.request.RegisterUserRequest;
+import com.hyjf.common.exception.ServiceException;
+import com.hyjf.common.util.GetCode;
+import com.hyjf.common.util.GetDate;
+import com.hyjf.common.util.MD5Utils;
+import com.hyjf.common.util.Validator;
+import com.hyjf.iam.dao.mapper.auto.*;
+import com.hyjf.iam.dao.model.auto.*;
+import com.hyjf.iam.service.UserService;
 
 /**
  * @author xiasq
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService{
     private UsersLogMapper usersLogMapper;
 
     @Override
-    public com.hyjf.dao.model.auto.Users register(RegisterUserRequest userRequest) throws ServiceException {
+    public Users register(RegisterUserRequest userRequest) throws ServiceException {
 
         int userId = 0;
         String mobile = userRequest.getMobilephone();
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService{
         String utmId = userRequest.getUtm_id();
         try {
             // 写入用户信息表
-            com.hyjf.dao.model.auto.Users user = new com.hyjf.dao.model.auto.Users();
+            Users user = new Users();
             String userName = getUniqueUsername(mobile);
             user.setInstCode("10000000");
             user.setIsInstFlag(0);
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService{
             user.setUserType(0);
             user.setIsSetPassword(0);// 是否设置了交易密码 0未设置
             // user.setEmail(ru.getEmail());
-            List<com.hyjf.dao.model.auto.Users> recommends = null;
+            List<Users> recommends = null;
             // 写入用户详情表
             UsersInfo userInfo = new UsersInfo();
             // 以下语句用来设置用户有无主单开始 2015年12月30日18:28:34 孙亮

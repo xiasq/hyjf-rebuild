@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.cs.iam.constants.CustomConstants;
+import com.hyjf.common.exception.ReturnMessageException;
+import com.hyjf.common.constants.CustomConstants;
 import com.hyjf.cs.iam.service.IamService;
 import com.hyjf.cs.iam.service.UserService;
 import com.hyjf.cs.iam.util.GetDate;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hyjf.cs.iam.constants.RegisterError;
-import com.hyjf.cs.iam.exception.ReturnMessageException;
 import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
@@ -116,68 +116,70 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
 	private void afterRegisterHandle(UserVO userVO) {
 		int userId = userVO.getUserId();
 
 		int timestamp = GetDate.getMyTimeInMillis();
-		//todo
-		//String useridStr = TreeDESUtils.getEncrypt(String.valueOf(timestamp), String.valueOf(userId));
-//		ret.put("connection", useridStr);
-//		ret.put("timestamp", timestamp);
-//		ret.put("userid", userid);
-//		ret.put("couponSendCount", 0);
-//		ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_TRUE);
-//		ret.put(UserRegistDefine.INFO, "注册成功");
-//		try {
-//			WebViewUser webUser = loginService.getWebViewUserByUserId(userid);
-//			WebUtils.sessionLogin(request, response, webUser);
-//		} catch (Exception e) {
-//			logger
-//			LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.INIT_REGIST_ACTION, "用户不存在，有可能读写数据库不同步", e);
-//		}
+		// todo
+		// String useridStr = TreeDESUtils.getEncrypt(String.valueOf(timestamp),
+		// String.valueOf(userId));
+		// ret.put("connection", useridStr);
+		// ret.put("timestamp", timestamp);
+		// ret.put("userid", userid);
+		// ret.put("couponSendCount", 0);
+		// ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_TRUE);
+		// ret.put(UserRegistDefine.INFO, "注册成功");
+		// try {
+		// WebViewUser webUser = loginService.getWebViewUserByUserId(userid);
+		// WebUtils.sessionLogin(request, response, webUser);
+		// } catch (Exception e) {
+		// logger
+		// LogUtil.errorLog(UserRegistDefine.THIS_CLASS,
+		// UserRegistDefine.INIT_REGIST_ACTION, "用户不存在，有可能读写数据库不同步", e);
+		// }
 
 		// 投之家用户注册送券活动
-//		String activityIdTzj = CustomConstants.REGIST_TZJ_ACTIVITY_ID;
-//		// 活动有效期校验
-//		String resultActivityTzj = couponCheckUtil.checkActivityIfAvailable(activityIdTzj);
-//		if (StringUtils.isEmpty(resultActivityTzj)) {
-//			Users user = loginService.getUsers(userid);
-//			// 投之家用户额外发两张加息券
-//			if(StringUtils.isNotEmpty(user.getReferrerUserName()) && user.getReferrerUserName().equals("touzhijia")){
-//				CommonParamBean paramBean = new CommonParamBean();
-//				paramBean.setUserId(String.valueOf(userid));
-//				paramBean.setCouponSource(2);
-//				paramBean.setCouponCode("PJ2958703");
-//				paramBean.setSendCount(2);
-//				paramBean.setActivityId(Integer.parseInt(activityIdTzj));
-//				paramBean.setRemark("投之家用户注册送加息券");
-//				paramBean.setSendFlg(0);
-//				// 发放两张加息券
-//				CommonSoaUtils.sendUserCouponNoRet(paramBean);
-//
-//			}
-//
-//		}
+		// String activityIdTzj = CustomConstants.REGIST_TZJ_ACTIVITY_ID;
+		// // 活动有效期校验
+		// String resultActivityTzj =
+		// couponCheckUtil.checkActivityIfAvailable(activityIdTzj);
+		// if (StringUtils.isEmpty(resultActivityTzj)) {
+		// Users user = loginService.getUsers(userid);
+		// // 投之家用户额外发两张加息券
+		// if(StringUtils.isNotEmpty(user.getReferrerUserName()) &&
+		// user.getReferrerUserName().equals("touzhijia")){
+		// CommonParamBean paramBean = new CommonParamBean();
+		// paramBean.setUserId(String.valueOf(userid));
+		// paramBean.setCouponSource(2);
+		// paramBean.setCouponCode("PJ2958703");
+		// paramBean.setSendCount(2);
+		// paramBean.setActivityId(Integer.parseInt(activityIdTzj));
+		// paramBean.setRemark("投之家用户注册送加息券");
+		// paramBean.setSendFlg(0);
+		// // 发放两张加息券
+		// CommonSoaUtils.sendUserCouponNoRet(paramBean);
+		//
+		// }
+		//
+		// }
 
 		// add by zhangjinpeng 注册送188元新手红包 start
 		// 发券成功
 		// 发送短信通知
-//		String activityId = CustomConstants.REGIST_888_ACTIVITY_ID;
-//		// 活动有效期校验
-//		String resultActivity = couponCheckUtil.checkActivityIfAvailable(activityId);
-//		if (StringUtils.isEmpty(resultActivity)) {
-//			try {
-//				sendCoupon(userid);
-//			} catch (Exception e) {
-//				LogUtil.errorLog(this.getClass().getName(), "regist", "注册发放888红包失败", e);
-//			}
-//			// 发送短信通知
-//			sendSmsCoupon(userid,mobile);
-//			ret.put("couponSendCount", 8);
-//
-//		}
-
+		// String activityId = CustomConstants.REGIST_888_ACTIVITY_ID;
+		// // 活动有效期校验
+		// String resultActivity = couponCheckUtil.checkActivityIfAvailable(activityId);
+		// if (StringUtils.isEmpty(resultActivity)) {
+		// try {
+		// sendCoupon(userid);
+		// } catch (Exception e) {
+		// LogUtil.errorLog(this.getClass().getName(), "regist", "注册发放888红包失败", e);
+		// }
+		// // 发送短信通知
+		// sendSmsCoupon(userid,mobile);
+		// ret.put("couponSendCount", 8);
+		//
+		// }
 
 	}
 }

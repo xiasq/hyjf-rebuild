@@ -1,9 +1,9 @@
 /*
  * @Copyright: 2005-2018 www.hyjf.com. All rights reserved.
  */
-package com.hyjf.iam.util;
+package com.hyjf.common.util;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Timestamp;
@@ -897,7 +897,7 @@ public class GetDate extends PropertyEditorSupport {
          * HH:mm:ss“ * @param text String类型的时间值
          */
         public void setAsText(String text) throws IllegalArgumentException {
-            if (StringUtils.hasText(text)) {
+            if (StringUtils.isNotBlank(text)) {
                 try {
                     if (text.indexOf(":") == -1 && text.length() == 10) {
                         setValue(this.date_sdf.parse(text));
