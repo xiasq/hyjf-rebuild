@@ -18,4 +18,6 @@ public interface IamService {
 	UserVO register(RegisterUserRequest request);
 
 	UserVO getUserById(int userId);
+
+	int saveSmsCode(String mobile, String checkCode, String validCodeType, Integer status, String platform);
 }

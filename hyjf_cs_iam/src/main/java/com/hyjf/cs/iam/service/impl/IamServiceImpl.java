@@ -108,4 +108,19 @@ public class IamServiceImpl implements IamService {
 		}
 		return null;
 	}
+
+	@Override
+	public int saveSmsCode(String mobile, String checkCode, String validCodeType, Integer status, String platform) {
+		SmsCodeResponse response = null;
+		try {
+			response = restTemplate.getForEntity("http://IAM/iam/user/saveSmsCode", SmsCodeResponse.class)
+					.getBody();
+			if (response != null) {
+				return 1;
+			}
+		} catch (RestClientException e) {
+			logger.error("getUserByUserId failed...", e);
+		}
+		return 0;
+	}
 }
