@@ -32,8 +32,6 @@ import javax.validation.Valid;
 public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	//ceshigit
-
 	@Autowired
 	private UserService userService;
 
