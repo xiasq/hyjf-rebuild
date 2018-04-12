@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyjf.iam.dao.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.hyjf.iam.pojo.Account" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="DECIMAL" />
+        <result column="income" property="income" jdbcType="DECIMAL" />
+        <result column="expend" property="expend" jdbcType="DECIMAL" />
+        <result column="bank_total" property="bankTotal" jdbcType="DECIMAL" />
+        <result column="bank_balance" property="bankBalance" jdbcType="DECIMAL" />
+        <result column="bank_frost" property="bankFrost" jdbcType="DECIMAL" />
+        <result column="bank_wait_repay" property="bankWaitRepay" jdbcType="DECIMAL" />
+        <result column="bank_balance_cash" property="bankBalanceCash" jdbcType="DECIMAL" />
+        <result column="bank_frost_cash" property="bankFrostCash" jdbcType="DECIMAL" />
+        <result column="bank_wait_capital" property="bankWaitCapital" jdbcType="DECIMAL" />
+        <result column="bank_wait_interest" property="bankWaitInterest" jdbcType="DECIMAL" />
+        <result column="bank_wait_repay_org" property="bankWaitRepayOrg" jdbcType="DECIMAL" />
+        <result column="bank_await_capital" property="bankAwaitCapital" jdbcType="DECIMAL" />
+        <result column="bank_await_interest" property="bankAwaitInterest" jdbcType="DECIMAL" />
+        <result column="bank_await_org" property="bankAwaitOrg" jdbcType="DECIMAL" />
+        <result column="bank_interest_sum" property="bankInterestSum" jdbcType="DECIMAL" />
+        <result column="bank_invest_sum" property="bankInvestSum" jdbcType="DECIMAL" />
+        <result column="bank_await" property="bankAwait" jdbcType="DECIMAL" />
+        <result column="balance" property="balance" jdbcType="DECIMAL" />
+        <result column="balance_cash" property="balanceCash" jdbcType="DECIMAL" />
+        <result column="balance_frost" property="balanceFrost" jdbcType="DECIMAL" />
+        <result column="frost" property="frost" jdbcType="DECIMAL" />
+        <result column="await" property="await" jdbcType="DECIMAL" />
+        <result column="repay" property="repay" jdbcType="DECIMAL" />
+        <result column="frost_cash" property="frostCash" jdbcType="DECIMAL" />
+        <result column="is_update" property="isUpdate" jdbcType="INTEGER" />
+        <result column="isok" property="isok" jdbcType="TINYINT" />
+        <result column="rec_money" property="recMoney" jdbcType="DECIMAL" />
+        <result column="fee" property="fee" jdbcType="DECIMAL" />
+        <result column="in_money" property="inMoney" jdbcType="DECIMAL" />
+        <result column="in_money_flag" property="inMoneyFlag" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="DECIMAL" />
+        <result column="plan_balance" property="planBalance" jdbcType="DECIMAL" />
+        <result column="plan_frost" property="planFrost" jdbcType="DECIMAL" />
+        <result column="plan_accede_total" property="planAccedeTotal" jdbcType="DECIMAL" />
+        <result column="plan_accede_balance" property="planAccedeBalance" jdbcType="DECIMAL" />
+        <result column="plan_accede_frost" property="planAccedeFrost" jdbcType="DECIMAL" />
+        <result column="plan_account_wait" property="planAccountWait" jdbcType="DECIMAL" />
+        <result column="plan_capital_wait" property="planCapitalWait" jdbcType="DECIMAL" />
+        <result column="plan_interest_wait" property="planInterestWait" jdbcType="DECIMAL" />
+        <result column="plan_repay_interest" property="planRepayInterest" jdbcType="DECIMAL" />
+    </resultMap>
+
+
+
+</mapper>

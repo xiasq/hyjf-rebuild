@@ -2,9 +2,9 @@ package com.hyjf.iam.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.com.request.UserRequest;
 import com.hyjf.com.response.UserResponse;
 import com.hyjf.com.vo.UserVO;
+import com.hyjf.dao.model.auto.Users;
 import com.hyjf.iam.exception.ServiceException;
 import com.hyjf.iam.pojo.User;
 import com.hyjf.iam.service.UserService;
@@ -42,7 +42,7 @@ public class UserController {
 		logger.info("user register:" + JSONObject.toJSONString(userRequest));
 		UserResponse userResponse = new UserResponse();
 		try {
-			User user = userService.register(userRequest);
+			com.hyjf.dao.model.auto.Users user = userService.register(userRequest);
 			if (user == null) {
 				userResponse.setRtn(UserResponse.USER_EXISTS);
 				userResponse.setMessage(UserResponse.USER_EXISTS_MSG);
@@ -76,7 +76,7 @@ public class UserController {
 	@RequestMapping("/findUserByUserId/{userId}")
 	public UserResponse findUserByUserId(@PathVariable int userId) {
 		UserResponse response = new UserResponse();
-		User user = userService.findUserByUserId(userId);
+		Users user = userService.findUserByUserId(userId);
 		if (user != null) {
 			UserVO userVO = new UserVO();
 			BeanUtils.copyProperties(user, userVO);

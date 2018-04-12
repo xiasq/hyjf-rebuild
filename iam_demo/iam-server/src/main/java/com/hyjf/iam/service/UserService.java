@@ -1,17 +1,22 @@
 package com.hyjf.iam.service;
 
 import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.com.request.UserRequest;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.dao.model.auto.Users;
 import com.hyjf.iam.exception.ServiceException;
-import com.hyjf.iam.pojo.User;
 
 /**
  * @author xiasq
  * @version UserService, v0.1 2018/1/21 22:42
  */
 public interface UserService {
-    User register(RegisterUserRequest userRequest) throws ServiceException;
+    Users register(RegisterUserRequest userRequest) throws ServiceException;
 
-    User findUserByUserId(int userId);
+    Users findUserByUserId(int userId);
+
+    /**
+     * 获取唯一用户id
+     * @param mobile
+     * @return
+     */
+    String getUniqueUsername(String mobile);
 }
