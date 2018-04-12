@@ -23,7 +23,7 @@ import com.hyjf.vo.RegisterVO;
  */
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 

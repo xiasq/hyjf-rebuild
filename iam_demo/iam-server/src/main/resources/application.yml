@@ -52,4 +52,4 @@ spring:
     timeout: 0
  
 mybatis:
-  mapperLocations: classpath:mapper/*.xml
+  mapperLocations: classpath:com/hyjf/dao/mapper/xml/*/*.xml
