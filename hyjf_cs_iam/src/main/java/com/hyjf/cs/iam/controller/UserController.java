@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.vo.UserVO;
+import com.hyjf.common.exception.MQException;
 import com.hyjf.cs.iam.constants.RegisterError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class UserController {
 
 	@RequestMapping(value = "/sendcode", produces = "application/json; charset=utf-8")
 	public BaseResultBean sendSmsCode(@RequestParam String validCodeType, @RequestParam String mobile,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws MQException {
 		logger.info("sendSmsCode start, validCodeType is :{}, mobile is: {}", validCodeType, mobile);
 		BaseResultBean resultBean = new BaseResultBean();
 		userService.sendSmsCode(validCodeType, mobile, request);

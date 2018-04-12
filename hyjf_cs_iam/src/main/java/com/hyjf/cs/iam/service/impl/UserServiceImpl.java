@@ -210,7 +210,7 @@ public class UserServiceImpl implements UserService {
 	 * @param request
 	 */
 	@Override
-	public void sendSmsCode(String validCodeType, String mobile, HttpServletRequest request) {
+	public void sendSmsCode(String validCodeType, String mobile, HttpServletRequest request) throws MQException {
 
 		this.sendSmsCodeCheckParam(validCodeType, mobile, request);
 
@@ -229,12 +229,9 @@ public class UserServiceImpl implements UserService {
 		params.put("mobile", mobile);
 
 		// 发送
-		try {
-			smsProducer.messageSend(
-					new Producer.MassageContent(smsTopic, defaultTag, "sms_" + mobile, JSON.toJSONBytes(params)));
-		} catch (MQException e) {
-			logger.error("短信验证码发送失败...", e);
-		}
+		smsProducer.messageSend(
+				new Producer.MassageContent(smsTopic, defaultTag, "", JSON.toJSONBytes(params)));
+
 	}
 
 	private void sendSmsCodeCheckParam(String validCodeType, String mobile, HttpServletRequest request) {
@@ -471,8 +468,8 @@ public class UserServiceImpl implements UserService {
 				JSONObject params = new JSONObject();
 				params.put("mobile", userVO.getMobile());
 				try {
-					smsProducer.messageSend(
-							new Producer.MassageContent(smsTopic, defaultTag, "sms_" + userVO.getMobile(), JSON.toJSONBytes(params)));
+					smsProducer.messageSend(new Producer.MassageContent(smsTopic, defaultTag,
+							"sms_" + userVO.getMobile(), JSON.toJSONBytes(params)));
 				} catch (MQException e) {
 					logger.error("短信发送失败...", e);
 				}

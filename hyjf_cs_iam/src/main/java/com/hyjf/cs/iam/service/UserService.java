@@ -1,6 +1,7 @@
 package com.hyjf.cs.iam.service;
 
 import com.hyjf.com.vo.UserVO;
+import com.hyjf.common.exception.MQException;
 import com.hyjf.common.exception.ReturnMessageException;
 import com.hyjf.common.session.WebViewUser;
 import com.hyjf.cs.iam.vo.RegisterVO;
@@ -18,5 +19,5 @@ public interface UserService {
 
 	WebViewUser getWebViewUserByUserId(Integer userId);
 
-	void sendSmsCode(String validCodeType, String mobile, HttpServletRequest request);
+	void sendSmsCode(String validCodeType, String mobile, HttpServletRequest request) throws MQException;
 }

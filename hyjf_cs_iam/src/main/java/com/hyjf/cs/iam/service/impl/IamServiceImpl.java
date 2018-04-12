@@ -27,15 +27,13 @@ public class IamServiceImpl implements IamService {
 	@Override
 	public UserVO findUserByMobile(String mobile) {
 		UserResponse response = null;
-		try {
-			response = restTemplate.getForEntity("http://IAM/iam/user/findUserByMobile/" + mobile, UserResponse.class)
-					.getBody();
-			if (response != null) {
-				return response.getResult();
-			}
-		} catch (RestClientException e) {
-			logger.error("findUserByMobile failed...", e);
+
+		response = restTemplate.getForEntity("http://IAM/iam/user/findUserByMobile/" + mobile, UserResponse.class)
+				.getBody();
+		if (response != null) {
+			return response.getResult();
 		}
+
 		return null;
 	}
 
@@ -50,14 +48,9 @@ public class IamServiceImpl implements IamService {
 		request.setSearchStatus(searchStatus);
 		request.setUpdateStatus(updateStatus);
 
-		try {
-			restTemplate.postForEntity("http://IAM/iam/user/findUserByRecommendName/", request, SmsCodeResponse.class)
-					.getBody();
-			return 1;
-		} catch (RestClientException e) {
-			logger.error("updateCheckMobileCode failed...", e);
-		}
-		return 0;
+		restTemplate.postForEntity("http://IAM/iam/user/findUserByRecommendName/", request, SmsCodeResponse.class)
+				.getBody();
+		return 1;
 	}
 
 	/**
@@ -66,15 +59,11 @@ public class IamServiceImpl implements IamService {
 	@Override
 	public int countUserByRecommendName(String reffer) {
 		UserResponse response = null;
-		try {
-			response = restTemplate
-					.getForEntity("http://IAM/iam/user/findUserByRecommendName/" + reffer, UserResponse.class)
-					.getBody();
-			if (response != null && response.getResult() != null) {
-				return 1;
-			}
-		} catch (RestClientException e) {
-			logger.error("getUserByUserId failed...", e);
+
+		response = restTemplate
+				.getForEntity("http://IAM/iam/user/findUserByRecommendName/" + reffer, UserResponse.class).getBody();
+		if (response != null && response.getResult() != null) {
+			return 1;
 		}
 		return 0;
 	}
@@ -82,14 +71,10 @@ public class IamServiceImpl implements IamService {
 	@Override
 	public UserVO register(RegisterUserRequest request) {
 		UserResponse response = null;
-		try {
-			response = restTemplate.postForEntity("http://IAM/iam/user/register", request, UserResponse.class)
-					.getBody();
-			if (response != null) {
-				return response.getResult();
-			}
-		} catch (RestClientException e) {
-			logger.error("getUserByUserId failed...", e);
+
+		response = restTemplate.postForEntity("http://IAM/iam/user/register", request, UserResponse.class).getBody();
+		if (response != null) {
+			return response.getResult();
 		}
 		return null;
 	}
@@ -97,29 +82,20 @@ public class IamServiceImpl implements IamService {
 	@Override
 	public UserVO getUserById(int userId) {
 		UserResponse response = null;
-		try {
-			response = restTemplate.getForEntity("http://IAM/iam/user/getUserById" + userId, UserResponse.class)
-					.getBody();
-			if (response != null) {
-				return response.getResult();
-			}
-		} catch (RestClientException e) {
-			logger.error("getUserByUserId failed...", e);
+
+		response = restTemplate.getForEntity("http://IAM/iam/user/getUserById" + userId, UserResponse.class).getBody();
+		if (response != null) {
+			return response.getResult();
 		}
 		return null;
 	}
 
 	@Override
 	public int saveSmsCode(String mobile, String checkCode, String validCodeType, Integer status, String platform) {
-		SmsCodeResponse response = null;
-		try {
-			response = restTemplate.getForEntity("http://IAM/iam/user/saveSmsCode", SmsCodeResponse.class)
-					.getBody();
-			if (response != null) {
-				return 1;
-			}
-		} catch (RestClientException e) {
-			logger.error("getUserByUserId failed...", e);
+		SmsCodeResponse response = restTemplate.getForEntity("http://IAM/iam/user/saveSmsCode", SmsCodeResponse.class)
+				.getBody();
+		if (response != null) {
+			return 1;
 		}
 		return 0;
 	}

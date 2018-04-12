@@ -3,6 +3,7 @@ package com.hyjf.cs.iam;
 import javax.servlet.http.HttpServletRequest;
 
 import com.hyjf.common.exception.ReturnMessageException;
+import com.hyjf.cs.iam.result.BaseResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,25 +21,25 @@ import com.hyjf.com.vo.BaseVO;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    private static final String SYSTEM_ERROR = "100";
+    private static final String SYSTEM_ERROR = "99";
     private static final String SYSTEM_ERROR_MSG = "系统异常";
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Response<BaseVO> defaultErrorHandler(HttpServletRequest req, Exception e) {
+    public BaseResultBean defaultErrorHandler(HttpServletRequest req, Exception e) {
         logger.error("system error", e);
-        Response<BaseVO> response = new Response<BaseVO>();
-        response.setRtn(SYSTEM_ERROR);
-        response.setMessage(SYSTEM_ERROR_MSG);
+        BaseResultBean response = new BaseResultBean();
+        response.setStatus(SYSTEM_ERROR);
+        response.setStatusDesc(SYSTEM_ERROR_MSG);
         return response;
     }
 
     @ExceptionHandler(value = ReturnMessageException.class)
     @ResponseBody
-    public Response<BaseVO> defaultReturnErrorHandler(HttpServletRequest req, ReturnMessageException e) {
-        Response<BaseVO> response = new Response<BaseVO>();
-        response.setRtn(e.getError().getErrCode());
-        response.setMessage(e.getError().getMessage());
+    public BaseResultBean defaultReturnErrorHandler(HttpServletRequest req, ReturnMessageException e) {
+        BaseResultBean response = new BaseResultBean();
+        response.setStatus(e.getError().getErrCode());
+        response.setStatusDesc(e.getError().getMessage());
         return response;
     }
 

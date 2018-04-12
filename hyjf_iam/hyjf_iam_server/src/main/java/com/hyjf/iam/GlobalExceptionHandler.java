@@ -20,7 +20,7 @@ import com.hyjf.com.vo.BaseVO;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    private static final String SYSTEM_ERROR = "100";
+    private static final String SYSTEM_ERROR = "99";
     private static final String SYSTEM_ERROR_MSG = "系统异常";
 
     @ExceptionHandler(value = Exception.class)
