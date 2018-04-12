@@ -1,61 +1,68 @@
 package com.hyjf.com.vo;
 
-import java.util.Date;
-
-
 /**
  * @author xiasq
  * @version UserVO, v0.1 2018/1/21 22:39
  */
 public class UserVO extends BaseVO {
 
-    private Integer userId;
+	private Integer userId;
 
-    private String username;
+	private String username;
 
-    private String mobile;
+	private String mobile;
 
-    private String email;
+	private String email;
 
-    private String password;
+	private String password;
 
-    public Integer getUserId() {
-        return userId;
-    }
+	private String referrerUserName;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getReferrerUserName() {
+		return referrerUserName;
+	}
+
+	public void setReferrerUserName(String referrerUserName) {
+		this.referrerUserName = referrerUserName;
+	}
 }

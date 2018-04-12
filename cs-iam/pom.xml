@@ -69,6 +69,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.hyjf</groupId>
             <artifactId>iam-common</artifactId>
             <version>1.0-SNAPSHOT</version>

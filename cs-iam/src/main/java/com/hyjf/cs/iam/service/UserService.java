@@ -2,6 +2,7 @@ package com.hyjf.cs.iam.service;
 
 import com.hyjf.com.vo.UserVO;
 import com.hyjf.common.exception.ReturnMessageException;
+import com.hyjf.common.session.WebViewUser;
 import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
@@ -12,4 +13,6 @@ public interface UserService {
 	UserVO register(RegisterVO registerVO) throws ReturnMessageException;
 
 	boolean existUser(String mobile);
+
+	WebViewUser getWebViewUserByUserId(Integer userId);
 }

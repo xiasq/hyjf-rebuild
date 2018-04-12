@@ -93,4 +93,19 @@ public class IamServiceImpl implements IamService {
 		}
 		return null;
 	}
+
+	@Override
+	public UserVO getUserById(int userId) {
+		UserResponse response = null;
+		try {
+			response = restTemplate.getForEntity("http://IAM/iam/user/getUserById" + userId, UserResponse.class)
+					.getBody();
+			if (response != null) {
+				return response.getResult();
+			}
+		} catch (RestClientException e) {
+			logger.error("getUserByUserId failed...", e);
+		}
+		return null;
+	}
 }

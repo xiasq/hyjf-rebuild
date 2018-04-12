@@ -16,4 +16,6 @@ public interface IamService {
 	int countUserByRecommendName(String reffer);
 
 	UserVO register(RegisterUserRequest request);
+
+	UserVO getUserById(int userId);
 }

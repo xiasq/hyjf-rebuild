@@ -5,19 +5,32 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.com.vo.UserVO;
-import com.hyjf.common.exception.ReturnMessageException;
-import com.hyjf.common.constants.CustomConstants;
-import com.hyjf.cs.iam.service.IamService;
-import com.hyjf.cs.iam.service.UserService;
-import com.hyjf.cs.iam.util.GetDate;
-import com.hyjf.cs.iam.util.Validator;
+import com.hyjf.common.util.GetCode;
+import com.hyjf.cs.iam.service.CouponService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.hyjf.com.request.RegisterUserRequest;
+import com.hyjf.com.vo.UserVO;
+import com.hyjf.common.constants.CustomConstants;
+import com.hyjf.common.exception.MQException;
+import com.hyjf.common.exception.ReturnMessageException;
+import com.hyjf.common.session.WebViewUser;
+import com.hyjf.common.util.GetDate;
+import com.hyjf.common.util.TreeDESUtils;
+import com.hyjf.common.util.Validator;
 import com.hyjf.cs.iam.constants.RegisterError;
+import com.hyjf.cs.iam.mq.CouponProducer;
+import com.hyjf.cs.iam.mq.Producer;
+import com.hyjf.cs.iam.service.IamService;
+import com.hyjf.cs.iam.service.UserService;
 import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
@@ -27,9 +40,24 @@ import com.hyjf.cs.iam.vo.RegisterVO;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private IamService iamService;
+
+	@Autowired
+	private CouponService couponService;
+	@Autowired
+	private CouponProducer couponProducer;
+
+	@Value("${rocketMQ.topic.coupon}")
+	private String couponTopic;
+	@Value("${rocketMQ.tag.defaultTag}")
+	private String defaultTag;
+	@Value("${hyjf.activity.regist.tzj.id}")
+	private String activityIdTzj;
+	@Value("${hyjf.activity.888.id}")
+	private String activityId;
 
 	/**
 	 * 1. 必要参数检查 2. 注册 3. 注册后处理
@@ -57,6 +85,106 @@ public class UserServiceImpl implements UserService {
 	public boolean existUser(String mobile) {
 		UserVO userVO = iamService.findUserByMobile(mobile);
 		return userVO == null ? false : true;
+	}
+
+	@Override
+	public WebViewUser getWebViewUserByUserId(Integer userId) {
+		WebViewUser result = new WebViewUser();
+		//
+		// UsersExample usersExample = new UsersExample();
+		// usersExample.createCriteria().andUserIdEqualTo(userId);
+		// List<Users> usersList = usersMapper.selectByExample(usersExample);
+		// Users user = usersList.get(0);
+		//
+		// result.setUserId(user.getUserId());
+		// result.setUsername(user.getUsername());
+		// if (StringUtils.isNotBlank(user.getMobile())) {
+		// result.setMobile(user.getMobile());
+		// }
+		// if (StringUtils.isNotBlank(user.getIconurl())) {
+		// String imghost =
+		// UploadFileUtils.getDoPath(PropUtils.getSystem("file.domain.head.url"));
+		// imghost = imghost.substring(0, imghost.length() - 1);//
+		// http://cdn.huiyingdai.com/
+		//
+		// String fileUploadTempPath =
+		// UploadFileUtils.getDoPath(PropUtils.getSystem("file.upload.head.path"));
+		// if(StringUtils.isNotEmpty(user.getIconurl())){
+		// result.setIconurl(imghost + fileUploadTempPath + user.getIconurl());
+		// }
+		// }
+		// if (StringUtils.isNotBlank(user.getEmail())) {
+		// result.setEmail(user.getEmail());
+		// }
+		// if (user.getOpenAccount() != null) {
+		// if (user.getOpenAccount().intValue() == 1) {
+		// result.setOpenAccount(true);
+		// } else {
+		// result.setOpenAccount(false);
+		// }
+		// }
+		// if (user.getBankOpenAccount() != null) {
+		// if (user.getBankOpenAccount() == 1) {
+		// result.setBankOpenAccount(true);
+		// } else {
+		// result.setBankOpenAccount(false);
+		// }
+		// }
+		// result.setRechargeSms(user.getRechargeSms());
+		// result.setWithdrawSms(user.getWithdrawSms());
+		// result.setInvestSms(user.getInvestSms());
+		// result.setRecieveSms(user.getRecieveSms());
+		// result.setIsSetPassword(user.getIsSetPassword());
+		// result.setIsEvaluationFlag(user.getIsEvaluationFlag());
+		// result.setIsSmtp(user.getIsSmtp());
+		// result.setUserType(user.getUserType());
+		// result.setPaymentAuthStatus(user.getPaymentAuthStatus());
+		//
+		// UsersInfoExample usersInfoExample = new UsersInfoExample();
+		// usersInfoExample.createCriteria().andUserIdEqualTo(userId);
+		// List<UsersInfo> usersInfoList =
+		// usersInfoMapper.selectByExample(usersInfoExample);
+		// if (usersInfoList != null && usersInfoList.size() > 0 &&
+		// usersInfoList.get(0).getSex() != null) {
+		// result.setSex(usersInfoList.get(0).getSex());
+		// if (StringUtils.isNotBlank(usersInfoList.get(0).getNickname())) {
+		// result.setNickname(usersInfoList.get(0).getNickname());
+		// }
+		// if (StringUtils.isNotBlank(usersInfoList.get(0).getTruename())) {
+		// result.setTruename(usersInfoList.get(0).getTruename());
+		// }
+		// if (StringUtils.isNotBlank(usersInfoList.get(0).getIdcard())) {
+		// result.setIdcard(usersInfoList.get(0).getIdcard());
+		// }
+		// result.setBorrowerType(usersInfoList.get(0).getBorrowerType());
+		// }
+		// result.setRoleId(usersInfoList.get(0).getRoleId() + "");
+		//
+		// AccountChinapnrExample chinapnrExample = new AccountChinapnrExample();
+		// chinapnrExample.createCriteria().andUserIdEqualTo(userId);
+		// List<AccountChinapnr> chinapnrList =
+		// accountChinapnrMapper.selectByExample(chinapnrExample);
+		// if (chinapnrList != null && chinapnrList.size() > 0) {
+		// result.setChinapnrUsrid(chinapnrList.get(0).getChinapnrUsrid());
+		// result.setChinapnrUsrcustid(chinapnrList.get(0).getChinapnrUsrcustid());
+		// }
+		//
+		// BankOpenAccount bankOpenAccount = this.getBankOpenAccount(userId);
+		// if (bankOpenAccount != null &&
+		// StringUtils.isNotEmpty(bankOpenAccount.getAccount())) {
+		// if (result.isBankOpenAccount()) {
+		// result.setBankAccount(bankOpenAccount.getAccount());
+		// }
+		// }
+		// // 用户紧急联系人
+		// UsersContractExample usersContractExample = new UsersContractExample();
+		// usersContractExample.createCriteria().andUserIdEqualTo(userId);
+		// List<UsersContract> UsersContractList =
+		// usersContractMapper.selectByExample(usersContractExample);
+		// if (UsersContractList != null && UsersContractList.size() > 0) {
+		// result.setUsersContract(UsersContractList.get(0));
+		// }
+		return result;
 	}
 
 	private void checkParam(RegisterVO registerVO) {
@@ -120,17 +248,18 @@ public class UserServiceImpl implements UserService {
 		int userId = userVO.getUserId();
 
 		int timestamp = GetDate.getMyTimeInMillis();
-		// todo
-		// String useridStr = TreeDESUtils.getEncrypt(String.valueOf(timestamp),
-		// String.valueOf(userId));
+
+		String useridStr = TreeDESUtils.getEncrypt(String.valueOf(timestamp), String.valueOf(userId));
+		// todo 用户登陆之后缓存
 		// ret.put("connection", useridStr);
 		// ret.put("timestamp", timestamp);
 		// ret.put("userid", userid);
 		// ret.put("couponSendCount", 0);
 		// ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_TRUE);
 		// ret.put(UserRegistDefine.INFO, "注册成功");
+
 		// try {
-		// WebViewUser webUser = loginService.getWebViewUserByUserId(userid);
+		// WebViewUser webUser = this.getWebViewUserByUserId(userId);
 		// WebUtils.sessionLogin(request, response, webUser);
 		// } catch (Exception e) {
 		// logger
@@ -139,47 +268,48 @@ public class UserServiceImpl implements UserService {
 		// }
 
 		// 投之家用户注册送券活动
-		// String activityIdTzj = CustomConstants.REGIST_TZJ_ACTIVITY_ID;
-		// // 活动有效期校验
-		// String resultActivityTzj =
-		// couponCheckUtil.checkActivityIfAvailable(activityIdTzj);
-		// if (StringUtils.isEmpty(resultActivityTzj)) {
-		// Users user = loginService.getUsers(userid);
-		// // 投之家用户额外发两张加息券
-		// if(StringUtils.isNotEmpty(user.getReferrerUserName()) &&
-		// user.getReferrerUserName().equals("touzhijia")){
-		// CommonParamBean paramBean = new CommonParamBean();
-		// paramBean.setUserId(String.valueOf(userid));
-		// paramBean.setCouponSource(2);
-		// paramBean.setCouponCode("PJ2958703");
-		// paramBean.setSendCount(2);
-		// paramBean.setActivityId(Integer.parseInt(activityIdTzj));
-		// paramBean.setRemark("投之家用户注册送加息券");
-		// paramBean.setSendFlg(0);
-		// // 发放两张加息券
-		// CommonSoaUtils.sendUserCouponNoRet(paramBean);
-		//
-		// }
-		//
-		// }
+		// 活动有效期校验
+		if (!couponService.checkActivityIfAvailable(activityIdTzj)) {
+			// 投之家用户额外发两张加息券
+			if (StringUtils.isNotEmpty(userVO.getReferrerUserName())
+					&& userVO.getReferrerUserName().equals("touzhijia")) {
+				// 发放两张加息券
+				JSONObject json = new JSONObject();
+				json.put("userId", userId);
+				json.put("couponSource", 2);
+				json.put("couponCode", "PJ2958703");
+				json.put("sendCount", 2);
+				json.put("activityId", Integer.parseInt(activityIdTzj));
+				json.put("remark", "投之家用户注册送加息券");
+				json.put("sendFlg", 0);
+				try {
+					couponProducer.messageSend(new Producer.MassageContent(couponTopic, defaultTag, "coupon_" + userId,
+							JSON.toJSONBytes(json)));
+				} catch (MQException e) {
+					logger.error("注册送券失败....userId is :" + userId, e);
+				}
 
-		// add by zhangjinpeng 注册送188元新手红包 start
-		// 发券成功
-		// 发送短信通知
-		// String activityId = CustomConstants.REGIST_888_ACTIVITY_ID;
-		// // 活动有效期校验
-		// String resultActivity = couponCheckUtil.checkActivityIfAvailable(activityId);
-		// if (StringUtils.isEmpty(resultActivity)) {
-		// try {
-		// sendCoupon(userid);
-		// } catch (Exception e) {
-		// LogUtil.errorLog(this.getClass().getName(), "regist", "注册发放888红包失败", e);
-		// }
-		// // 发送短信通知
-		// sendSmsCoupon(userid,mobile);
-		// ret.put("couponSendCount", 8);
-		//
-		// }
+			}
 
+			// 发券成功
+			// 发送短信通知
+			// 活动有效期校验
+			if (!couponService.checkActivityIfAvailable(activityId)) {
+				try {
+					JSONObject params = new JSONObject();
+					params.put("mqMsgId", GetCode.getRandomCode(10));
+					params.put("userId", String.valueOf(userId));
+					params.put("sendFlg", "11");
+					couponProducer.messageSend(new Producer.MassageContent(couponTopic, defaultTag, "coupon_" + userId,
+							JSON.toJSONBytes(params)));
+				} catch (Exception e) {
+					logger.error("注册发放888红包失败...", e);
+				}
+
+				// 发送短信通知
+				// sendSmsCoupon(userid, mobile);
+				// ret.put("couponSendCount", 8);
+			}
+		}
 	}
 }
