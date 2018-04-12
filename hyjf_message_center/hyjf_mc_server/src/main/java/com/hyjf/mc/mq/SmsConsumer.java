@@ -28,7 +28,7 @@ public class SmsConsumer extends Consumer {
 
     @Value("${rocketMQ.group.smsCodeGroup}")
     private String smsCodeGroup;
-    @Value("${rocketMQ.group.smsCodeTopic}")
+    @Value("${rocketMQ.topic.smsCodeTopic}")
     private String smsCodeTopic;
 
 	@Override

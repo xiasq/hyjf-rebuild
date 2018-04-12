@@ -22,16 +22,19 @@ spring:
 
 
 rocketMQ:
-  namesrvAddr: ${rocketMQ.namesrvAddr}
+  #namesrvAddr: ${rocketMQ.namesrvAddr}
+  namesrvAddr: 47.98.213.94:9876
   #以业务名为consumerGroup名，事件为tag
-  defaultProducerGroup : cs-iam
-  defaultConsumerGroup : cs-iam
+  defaultProducerGroup : hyjf_cs_iam
+  defaultConsumerGroup : hyjf_cs_iam
   group :
     couponGroup : CS_IAM_COUPON_GROUP
+    smsCodeGroup : MC_SMS_CODE_GROUP
   topic :
     couponTopic : CS_IAM_COUPON_TOPIC
+    smsCodeTopic : MC_SMS_CODE_TOPIC
   tag :
-    defaultTag : cs-iam
+    defaultTag : hyjf_cs_iam
 
 env.test: false
 hyjf.activity.888.id: 37

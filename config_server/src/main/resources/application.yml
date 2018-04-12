@@ -6,8 +6,8 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:xiasq/hyjf-rebuild.git/config_files
-          #searchPaths: 配置仓库路径下的相对搜索位置，可以配置多个
+          uri: https://github.com/xiasq/hyjf-rebuild.git
+          searchPaths: config_files
           username: mx2012xshq@126.com
           password: abcd1234
 
