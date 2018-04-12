@@ -1,10 +1,10 @@
-package com.hyjf.controller;
+package com.hyjf.cs.iam.controller;
 
 import javax.validation.Valid;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.constants.RegisterError;
+import com.hyjf.cs.iam.constants.RegisterError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hyjf.result.BaseResultBean;
-import com.hyjf.service.UserService;
-import com.hyjf.vo.RegisterVO;
+import com.hyjf.cs.iam.result.BaseResultBean;
+import com.hyjf.cs.iam.service.UserService;
+import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
  * @author xiasq

@@ -1,4 +1,4 @@
-package com.hyjf.service.impl;
+package com.hyjf.cs.iam.service.impl;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -7,19 +7,18 @@ import java.util.regex.Pattern;
 
 import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.constants.CustomConstants;
-import com.hyjf.service.IamService;
-import com.hyjf.util.GetDate;
+import com.hyjf.cs.iam.constants.CustomConstants;
+import com.hyjf.cs.iam.service.IamService;
+import com.hyjf.cs.iam.service.UserService;
+import com.hyjf.cs.iam.util.GetDate;
+import com.hyjf.cs.iam.util.Validator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hyjf.constants.RegisterError;
-import com.hyjf.exception.ReturnMessageException;
-import com.hyjf.service.UserService;
-import com.hyjf.util.Validator;
-import com.hyjf.vo.RegisterVO;
-import org.springframework.web.util.WebUtils;
+import com.hyjf.cs.iam.constants.RegisterError;
+import com.hyjf.cs.iam.exception.ReturnMessageException;
+import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
  * @author xiasq

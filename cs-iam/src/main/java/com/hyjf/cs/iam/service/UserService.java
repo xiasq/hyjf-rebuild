@@ -1,8 +1,8 @@
-package com.hyjf.service;
+package com.hyjf.cs.iam.service;
 
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.exception.ReturnMessageException;
-import com.hyjf.vo.RegisterVO;
+import com.hyjf.cs.iam.exception.ReturnMessageException;
+import com.hyjf.cs.iam.vo.RegisterVO;
 
 /**
  * @author xiasq

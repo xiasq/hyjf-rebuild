@@ -1,4 +1,4 @@
-package com.hyjf.util;
+package com.hyjf.cs.iam.util;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Timestamp;

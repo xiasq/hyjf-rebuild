@@ -1,4 +1,4 @@
-package com.hyjf.util;
+package com.hyjf.cs.iam.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -1,11 +1,11 @@
-package com.hyjf.service.impl;
+package com.hyjf.cs.iam.service.impl;
 
 import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.request.SmsCodeRequest;
 import com.hyjf.com.response.SmsCodeResponse;
 import com.hyjf.com.response.UserResponse;
 import com.hyjf.com.vo.UserVO;
-import com.hyjf.service.IamService;
+import com.hyjf.cs.iam.service.IamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

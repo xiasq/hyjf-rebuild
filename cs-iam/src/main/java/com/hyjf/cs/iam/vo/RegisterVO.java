@@ -1,4 +1,4 @@
-package com.hyjf.vo;
+package com.hyjf.cs.iam.vo;
 
 /**
  * @author xiasq

@@ -1,4 +1,4 @@
-package com.hyjf.service;
+package com.hyjf.cs.iam.service;
 
 import com.hyjf.com.request.RegisterUserRequest;
 import com.hyjf.com.vo.UserVO;

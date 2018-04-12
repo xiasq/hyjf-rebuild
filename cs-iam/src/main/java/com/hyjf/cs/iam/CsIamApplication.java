@@ -1,4 +1,4 @@
-package com.hyjf;
+package com.hyjf.cs.iam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

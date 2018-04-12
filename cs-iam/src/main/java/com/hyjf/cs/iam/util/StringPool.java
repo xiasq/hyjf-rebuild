@@ -1,4 +1,4 @@
-package com.hyjf.util;
+package com.hyjf.cs.iam.util;
 
 public class StringPool {
 
