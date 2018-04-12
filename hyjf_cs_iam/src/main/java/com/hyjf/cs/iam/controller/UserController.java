@@ -28,11 +28,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	public BaseResultBean sendSmsCode(@RequestParam String validCodeType, @RequestParam String mobile, HttpServletRequest request) {
+	@RequestMapping(value = "/sendcode", produces = "application/json; charset=utf-8")
+	public BaseResultBean sendSmsCode(@RequestParam String validCodeType, @RequestParam String mobile,
+			HttpServletRequest request) {
 		logger.info("sendSmsCode start, validCodeType is :{}, mobile is: {}", validCodeType, mobile);
 		BaseResultBean resultBean = new BaseResultBean();
 		userService.sendSmsCode(validCodeType, mobile, request);
-
 		return resultBean;
 	}
 
