@@ -20,7 +20,7 @@ public abstract class Consumer {
     @PostConstruct
     public void init() throws MQClientException {
         defaultMQPushConsumer = new DefaultMQPushConsumer();
-        defaultMQPushConsumer.setInstanceName("MC");
+        defaultMQPushConsumer.setInstanceName(String.valueOf(System.currentTimeMillis()));
         defaultMQPushConsumer.setNamesrvAddr(namesrvAddr);
         init(defaultMQPushConsumer);
     }

@@ -15,8 +15,8 @@ public class SmsCodeRequest extends BaseVO {
 	private String verificationType;
 	// 平台
 	private String platform;
-	// 验证码更新前状态
-	private Integer searchStatus;
+	// 验证码
+	private Integer status;
 	// 验证码更新状态
 	private Integer updateStatus;
 
@@ -52,19 +52,19 @@ public class SmsCodeRequest extends BaseVO {
 		this.platform = platform;
 	}
 
-	public Integer getSearchStatus() {
-		return searchStatus;
-	}
-
-	public void setSearchStatus(Integer searchStatus) {
-		this.searchStatus = searchStatus;
-	}
-
 	public Integer getUpdateStatus() {
 		return updateStatus;
 	}
 
 	public void setUpdateStatus(Integer updateStatus) {
 		this.updateStatus = updateStatus;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

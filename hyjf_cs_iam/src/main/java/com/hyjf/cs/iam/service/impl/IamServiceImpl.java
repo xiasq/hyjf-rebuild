@@ -45,7 +45,7 @@ public class IamServiceImpl implements IamService {
 		request.setVerificationCode(verificationCode);
 		request.setVerificationType(verificationType);
 		request.setPlatform(platform);
-		request.setSearchStatus(searchStatus);
+		request.setStatus(searchStatus);
 		request.setUpdateStatus(updateStatus);
 
 		restTemplate.postForEntity("http://IAM/iam/user/findUserByRecommendName/", request, SmsCodeResponse.class)
@@ -92,7 +92,13 @@ public class IamServiceImpl implements IamService {
 
 	@Override
 	public int saveSmsCode(String mobile, String checkCode, String validCodeType, Integer status, String platform) {
-		SmsCodeResponse response = restTemplate.getForEntity("http://IAM/iam/user/saveSmsCode", SmsCodeResponse.class)
+		SmsCodeRequest request= new SmsCodeRequest();
+		request.setMobile(mobile);
+		request.setVerificationCode(checkCode);
+		request.setVerificationType(validCodeType);
+		request.setStatus(status);
+		request.setPlatform(platform);
+		SmsCodeResponse response = restTemplate.postForEntity("http://IAM/iam/sms/saveSmsCode", request, SmsCodeResponse.class)
 				.getBody();
 		if (response != null) {
 			return 1;

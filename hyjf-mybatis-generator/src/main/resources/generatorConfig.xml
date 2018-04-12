@@ -115,5 +115,12 @@
         <table tableName="huiyingdai_users_modify_log" domainObjectName="UsersModifyLog">
             <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
         </table>
+
+        <!-- 短信发送 -->
+        <table tableName="huiyingdai_smscode" domainObjectName="SmsCode">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+            <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
+
     </context>
 </generatorConfiguration>
