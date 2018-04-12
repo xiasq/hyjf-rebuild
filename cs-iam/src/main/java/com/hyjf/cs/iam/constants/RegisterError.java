@@ -17,7 +17,15 @@ public enum RegisterError implements ErrorCode {
 	PASSWORD_NO_NUMBER_ERROR("1", "密码必须包含数字"),
 	PASSWORD_FORMAT_ERROR("1", "密码必须由数字和字母组成，如abc123"),
 	SMSCODE_INVALID_ERROR("1", "验证码无效"),
-	REFFER_INVALID_ERROR("1", "推荐人无效");
+	REFFER_INVALID_ERROR("1", "推荐人无效"),
+
+
+	CODETYPE_INVALID_ERROR("1", "无效的验证码类型!"),
+	MOBILE_FORMAT_ERROR("1", "手机号格式不正确"),
+	USER_NOT_EXISTS_ERROR("1", "不存在用户")
+
+
+	;
 
 	private String errCode;
 	private String message;

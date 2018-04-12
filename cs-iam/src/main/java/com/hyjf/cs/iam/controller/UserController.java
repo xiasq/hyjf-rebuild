@@ -1,5 +1,6 @@
 package com.hyjf.cs.iam.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.alibaba.fastjson.JSONObject;
@@ -8,10 +9,7 @@ import com.hyjf.cs.iam.constants.RegisterError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hyjf.cs.iam.result.BaseResultBean;
 import com.hyjf.cs.iam.service.UserService;
@@ -30,11 +28,20 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-    /**
-     * 注册
-     * @param registerVO
-     * @return
-     */
+	public BaseResultBean sendSmsCode(@RequestParam String validCodeType, @RequestParam String mobile, HttpServletRequest request) {
+		logger.info("sendSmsCode start, validCodeType is :{}, mobile is: {}", validCodeType, mobile);
+		BaseResultBean resultBean = new BaseResultBean();
+		userService.sendSmsCode(validCodeType, mobile, request);
+
+		return resultBean;
+	}
+
+	/**
+	 * 注册
+	 * 
+	 * @param registerVO
+	 * @return
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public BaseResultBean register(@RequestBody @Valid RegisterVO registerVO) {
 		logger.info("register start, registerVO is :{}", JSONObject.toJSONString(registerVO));

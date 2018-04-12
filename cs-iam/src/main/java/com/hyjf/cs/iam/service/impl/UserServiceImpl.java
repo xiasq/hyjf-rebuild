@@ -2,17 +2,20 @@ package com.hyjf.cs.iam.service.impl;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.hyjf.common.util.GetCode;
-import com.hyjf.cs.iam.service.CouponService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -23,15 +26,20 @@ import com.hyjf.common.constants.CustomConstants;
 import com.hyjf.common.exception.MQException;
 import com.hyjf.common.exception.ReturnMessageException;
 import com.hyjf.common.session.WebViewUser;
+import com.hyjf.common.util.GetCode;
 import com.hyjf.common.util.GetDate;
 import com.hyjf.common.util.TreeDESUtils;
-import com.hyjf.common.util.Validator;
+import com.hyjf.common.validator.Validator;
 import com.hyjf.cs.iam.constants.RegisterError;
 import com.hyjf.cs.iam.mq.CouponProducer;
 import com.hyjf.cs.iam.mq.Producer;
+import com.hyjf.cs.iam.service.CouponService;
 import com.hyjf.cs.iam.service.IamService;
 import com.hyjf.cs.iam.service.UserService;
 import com.hyjf.cs.iam.vo.RegisterVO;
+import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author xiasq
@@ -49,6 +57,8 @@ public class UserServiceImpl implements UserService {
 	private CouponService couponService;
 	@Autowired
 	private CouponProducer couponProducer;
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 
 	@Value("${rocketMQ.topic.coupon}")
 	private String couponTopic;
@@ -68,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO register(RegisterVO registerVO) throws ReturnMessageException {
 
-		this.checkParam(registerVO);
+		this.registerCheckParam(registerVO);
 
 		RegisterUserRequest request = new RegisterUserRequest();
 		BeanUtils.copyProperties(registerVO, request);
@@ -187,7 +197,136 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
-	private void checkParam(RegisterVO registerVO) {
+	/**
+	 * 1. 验证码发送前校验
+	 * 2. 生成验证码
+	 * 3. 保存验证码
+	 * 4. 发送短信
+	 * @param validCodeType
+	 * @param mobile
+	 * @param request
+	 */
+	@Override
+	public void sendSmsCode(String validCodeType, String mobile, HttpServletRequest request) {
+		this.sendSmsCodeCheckParam(validCodeType, mobile, request);
+
+		// 生成验证码
+		String checkCode = GetCode.getRandomSMSCode(6);
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("val_code", checkCode);
+		// 发送
+
+
+
+
+
+
+	}
+
+	private void sendSmsCodeCheckParam(String validCodeType, String mobile, HttpServletRequest request) {
+
+		List<String> codeTypes = Arrays.asList(CustomConstants.PARAM_TPL_ZHUCE, CustomConstants.PARAM_TPL_ZHAOHUIMIMA,
+				CustomConstants.PARAM_TPL_YZYSJH, CustomConstants.PARAM_TPL_BDYSJH);
+		if (Validator.isNull(validCodeType) || !codeTypes.contains(validCodeType)) {
+			throw new ReturnMessageException(RegisterError.CODETYPE_INVALID_ERROR);
+		}
+		if (Validator.isNull(mobile) || !Validator.isMobile(mobile)) {
+			throw new ReturnMessageException(RegisterError.MOBILE_FORMAT_ERROR);
+		}
+
+		if (validCodeType.equals(CustomConstants.PARAM_TPL_ZHUCE)) {
+			// 注册时要判断不能重复
+			if (existUser(mobile)) {
+				throw new ReturnMessageException(RegisterError.MOBILE_EXISTS_ERROR);
+			}
+		}
+//		if (validCodeType.equals(CustomConstants.PARAM_TPL_YZYSJH)) {
+//			if (WebUtils.getUser(request) == null || StringUtils.isBlank(WebUtils.getUser(request).getMobile())) {
+//				throw new ReturnMessageException(RegisterError.USER_NOT_EXISTS_ERROR);
+//			}
+//			if (!WebUtils.getUser(request).getMobile().equals(mobile)) {
+//				ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_FALSE);
+//				ret.put(UserRegistDefine.ERROR, "获取验证码手机号与注册手机号不一致!");
+//				return ret;
+//			}
+//		}
+//		if (validCodeType.equals(CustomConstants.PARAM_TPL_BDYSJH)) {
+//			if (WebUtils.getUser(request) == null) {
+//				throw new ReturnMessageException(RegisterError.USER_NOT_EXISTS_ERROR);
+//			}
+//			if (WebUtils.getUser(request).getMobile().equals(mobile)) {
+//				ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_FALSE);
+//				ret.put(UserRegistDefine.ERROR, "修改手机号与原手机号不能相同!");
+//				return ret;
+//			}
+//			// 不能重复
+//			if (existUser(mobile)) {
+//				throw new ReturnMessageException(RegisterError.MOBILE_EXISTS_ERROR);
+//			}
+//		}
+
+		// SmsConfig smsConfig = registService.getSmsConfig();
+
+		// 判断发送间隔时间
+//		String intervalTime = RedisUtils.get(mobile + ":" + validCodeType + ":IntervalTime");
+//		System.out.println(mobile + ":" + validCodeType + "----------IntervalTime-----------" + intervalTime);
+//		if (StringUtils.isNotBlank(intervalTime)) {
+//			ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_FALSE);
+//			ret.put(UserRegistDefine.ERROR, "请求验证码操作过快");
+//			LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.REGIST_SEND_CODE_ACTION, "短信验证码发送失败", null);
+//			return ret;
+//		}
+//
+//		String ip = GetCilentIP.getIpAddr(request);
+//		String ipCount = RedisUtils.get(ip + ":MaxIpCount");
+//		if (StringUtils.isBlank(ipCount) || !Validator.isNumber(ipCount)) {
+//			ipCount = "0";
+//			RedisUtils.set(ip + ":MaxIpCount", "0");
+//		}
+//		System.out.println(mobile + "------ip---" + ip + "----------MaxIpCount-----------" + ipCount);
+//		if (Integer.valueOf(ipCount) >= smsConfig.getMaxIpCount()) {
+//			if (Integer.valueOf(ipCount) == smsConfig.getMaxIpCount()) {
+//				try {
+//					registService.sendSms(mobile, "IP访问次数超限:" + ip);
+//				} catch (Exception e) {
+//					LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.REGIST_SEND_CODE_ACTION, e);
+//				}
+//
+//				RedisUtils.set(ip + ":MaxIpCount", (Integer.valueOf(ipCount) + 1) + "", 24 * 60 * 60);
+//
+//			}
+//			ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_FALSE);
+//			ret.put(UserRegistDefine.ERROR, "该设备短信请求次数超限，请明日再试");
+//			LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.REGIST_SEND_CODE_ACTION, "短信验证码发送失败", null);
+//			return ret;
+//		}
+//
+//		// 判断最大发送数max_phone_count
+//		String count = RedisUtils.get(mobile + ":MaxPhoneCount");
+//		if (StringUtils.isBlank(count) || !Validator.isNumber(count)) {
+//			count = "0";
+//			RedisUtils.set(mobile + ":MaxPhoneCount", "0");
+//		}
+//		System.out.println(mobile + "----------MaxPhoneCount-----------" + count);
+//		if (Integer.valueOf(count) >= smsConfig.getMaxPhoneCount()) {
+//			if (Integer.valueOf(count) == smsConfig.getMaxPhoneCount()) {
+//				try {
+//					registService.sendSms(mobile, "手机验证码发送次数超限");
+//				} catch (Exception e) {
+//					LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.REGIST_SEND_CODE_ACTION, e);
+//				}
+//
+//				RedisUtils.set(mobile + ":MaxPhoneCount", (Integer.valueOf(count) + 1) + "", 24 * 60 * 60);
+//			}
+//			ret.put(UserRegistDefine.STATUS, UserRegistDefine.STATUS_FALSE);
+//			ret.put(UserRegistDefine.ERROR, "该手机号短信请求次数超限，请明日再试");
+//			LogUtil.errorLog(UserRegistDefine.THIS_CLASS, UserRegistDefine.REGIST_SEND_CODE_ACTION, "短信验证码发送失败", null);
+//			return ret;
+//		}
+
+	}
+
+	private void registerCheckParam(RegisterVO registerVO) {
 		if (registerVO == null)
 			throw new ReturnMessageException(RegisterError.REGISTER_ERROR);
 

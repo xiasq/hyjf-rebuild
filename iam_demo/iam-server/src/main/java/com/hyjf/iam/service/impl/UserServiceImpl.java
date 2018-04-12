@@ -15,7 +15,7 @@ import com.hyjf.common.exception.ServiceException;
 import com.hyjf.common.util.GetCode;
 import com.hyjf.common.util.GetDate;
 import com.hyjf.common.util.MD5Utils;
-import com.hyjf.common.util.Validator;
+import com.hyjf.common.validator.Validator;
 import com.hyjf.iam.dao.mapper.auto.*;
 import com.hyjf.iam.dao.model.auto.*;
 import com.hyjf.iam.service.UserService;

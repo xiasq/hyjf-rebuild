@@ -1,8 +1,11 @@
 /*
  * @Copyright: 2005-2018 www.hyjf.com. All rights reserved.
  */
-package com.hyjf.common.util;
+package com.hyjf.common.validator;
 
+import com.hyjf.common.util.CharPool;
+import com.hyjf.common.util.StringPool;
+import com.hyjf.common.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 
 import java.net.MalformedURLException;
