@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private StringRedisTemplate redisTemplate;
 
-	@Value("${rocketMQ.topic.coupon}")
+	@Value("${rocketMQ.topic.couponTopic}")
 	private String couponTopic;
 	@Value("${rocketMQ.tag.defaultTag}")
 	private String defaultTag;

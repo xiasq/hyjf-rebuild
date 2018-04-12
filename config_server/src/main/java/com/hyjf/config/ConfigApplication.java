@@ -1,4 +1,4 @@
-package com.hyjf;
+package com.hyjf.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

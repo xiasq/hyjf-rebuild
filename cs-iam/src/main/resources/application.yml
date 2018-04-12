@@ -18,3 +18,22 @@ spring:
       min-idle: 0  
     # 连接超时时间（毫秒）
     timeout: 0
+
+
+
+rocketMQ:
+  namesrvAddr: ${rocketMQ.namesrvAddr}
+  #以业务名为consumerGroup名，事件为tag
+  defaultProducerGroup : cs-iam
+  defaultConsumerGroup : cs-iam
+  group :
+    couponGroup : CS_IAM_COUPON_GROUP
+  topic :
+    couponTopic : CS_IAM_COUPON_TOPIC
+  tag :
+    defaultTag : cs-iam
+
+env.test: false
+hyjf.activity.888.id: 37
+hyjf.activity.regist.tzj.id: 39
+
