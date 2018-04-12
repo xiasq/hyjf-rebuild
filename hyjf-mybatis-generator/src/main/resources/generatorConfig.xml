@@ -69,5 +69,51 @@
             <columnOverride column="is_ca_flag" javaType="java.lang.Integer" jdbcType="TINYINT"/>
         </table>
 
+        <!-- 用戶详情表 -->
+        <table tableName="huiyingdai_users_info" domainObjectName="UsersInfo">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+            <columnOverride column="role_id" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="department_id" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="is_staff" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="is51" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="sex" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="truename_isApprove" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="mobile_isApprove" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="email_isApprove" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="borrower_type" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
+
+        <!-- 用户预注册表 -->
+        <table tableName="hyjf_pre_regist" domainObjectName="PreRegist">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+            <columnOverride column="regist_flag" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
+
+        <!-- 用户账户表 -->
+        <table tableName="huiyingdai_account" domainObjectName="Account">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+            <columnOverride column="isok" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
+
+        <!-- 推荐人关联表 -->
+        <table tableName="huiyingdai_spreads_users" domainObjectName="SpreadsUsers">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+        </table>
+
+        <!-- 推广链接注册表 -->
+        <table tableName="huiyingdai_utm_reg" domainObjectName="UtmReg">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+            <columnOverride column="open_account" javaType="java.lang.Integer" jdbcType="TINYINT" />
+            <columnOverride column="bind_card" javaType="java.lang.Integer" jdbcType="TINYINT" />
+        </table>
+
+        <!-- 用户log日志表 -->
+        <table tableName="huiyingdai_users_log" domainObjectName="UsersLog">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+        </table>
+        <!-- 用户信息操作履历表 -->
+        <table tableName="huiyingdai_users_modify_log" domainObjectName="UsersModifyLog">
+            <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
+        </table>
     </context>
 </generatorConfiguration>

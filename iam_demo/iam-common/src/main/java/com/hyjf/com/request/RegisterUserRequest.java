@@ -10,6 +10,8 @@ public class RegisterUserRequest {
 	private String reffer;
 	private String password;
 	private String utm_id;
+	private String loginIp;
+	private String platform;
 
 	public String getMobilephone() {
 		return mobilephone;
@@ -51,4 +53,19 @@ public class RegisterUserRequest {
 		this.utm_id = utm_id;
 	}
 
+	public String getLoginIp() {
+		return loginIp;
+	}
+
+	public void setLoginIp(String loginIp) {
+		this.loginIp = loginIp;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
 }
