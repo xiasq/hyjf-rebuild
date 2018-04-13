@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.hyjf.iam.exception.MQException;
+import com.hyjf.common.exception.MQException;
 import org.springframework.stereotype.Component;
 
 /**

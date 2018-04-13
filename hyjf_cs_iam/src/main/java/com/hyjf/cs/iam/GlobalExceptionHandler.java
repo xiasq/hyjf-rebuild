@@ -2,7 +2,7 @@ package com.hyjf.cs.iam;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.hyjf.iam.exception.ReturnMessageException;
+import com.hyjf.common.exception.ReturnMessageException;
 import com.hyjf.cs.iam.result.BaseResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.hyjf.iam.request.RegisterUserRequest;
-import com.hyjf.iam.exception.ServiceException;
+import com.hyjf.common.exception.ServiceException;
 import com.hyjf.common.util.GetCode;
 import com.hyjf.common.util.GetDate;
 import com.hyjf.common.util.MD5Utils;

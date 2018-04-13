@@ -7,7 +7,7 @@ import com.hyjf.iam.response.AccountResponse;
 import com.hyjf.iam.response.UserResponse;
 import com.hyjf.iam.vo.AccountVO;
 import com.hyjf.iam.vo.UserVO;
-import com.hyjf.iam.exception.ServiceException;
+import com.hyjf.common.exception.ServiceException;
 import com.hyjf.iam.dao.model.auto.Account;
 import com.hyjf.iam.dao.model.auto.Users;
 import com.hyjf.iam.service.SmsService;
