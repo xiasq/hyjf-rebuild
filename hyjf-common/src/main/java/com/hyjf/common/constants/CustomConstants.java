@@ -1,4 +1,4 @@
-package com.hyjf.iam.constants;
+package com.hyjf.common.constants;
 
 /**
  * @author xiasq

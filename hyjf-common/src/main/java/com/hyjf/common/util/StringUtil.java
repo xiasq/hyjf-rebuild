@@ -1,6 +1,6 @@
-package com.hyjf.iam.util;
+package com.hyjf.common.util;
 
-import com.hyjf.iam.validator.Validator;
+import com.hyjf.common.validator.Validator;
 
 import java.util.*;
 import java.util.regex.Matcher;

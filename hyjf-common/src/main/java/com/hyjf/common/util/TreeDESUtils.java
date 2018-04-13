@@ -9,9 +9,9 @@
  * Modified by : 
  */
 
-package com.hyjf.iam.util;
+package com.hyjf.common.util;
 
-import com.hyjf.iam.security.utils.ThreeDESUtils;
+import com.hyjf.common.security.utils.ThreeDESUtils;
 
 import java.net.URLEncoder;
 import java.util.Properties;

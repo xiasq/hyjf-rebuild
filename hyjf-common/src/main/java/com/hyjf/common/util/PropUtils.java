@@ -1,4 +1,4 @@
-package com.hyjf.iam.util;
+package com.hyjf.common.util;
 
 import java.io.IOException;
 import java.io.InputStream;

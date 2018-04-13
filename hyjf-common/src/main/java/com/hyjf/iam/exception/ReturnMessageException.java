@@ -1,6 +1,6 @@
 package com.hyjf.iam.exception;
 
-import com.hyjf.iam.constants.ErrorCode;
+import com.hyjf.common.constants.ErrorCode;
 
 /**
  * @author xiasq
