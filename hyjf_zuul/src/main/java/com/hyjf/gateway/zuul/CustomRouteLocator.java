@@ -45,7 +45,7 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 		LinkedHashMap<String, ZuulRoute> routesMap = new LinkedHashMap<String, ZuulRoute>();
 		// 从application.properties中加载路由信息
 		routesMap.putAll(super.locateRoutes());
-		// 从BS中加载路由信息
+		// 加载路由信息
 		routesMap.putAll(locateRoutesFromIAM());
 		// 优化一下配置
 		LinkedHashMap<String, ZuulRoute> values = new LinkedHashMap<String, ZuulRoute>();
