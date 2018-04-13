@@ -11,3 +11,6 @@ mc     8086
 batch: 8099
 
 zuul:18080
+
+http://localhost:8085/swagger-ui.html
+

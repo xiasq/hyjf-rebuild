@@ -1,4 +1,4 @@
-package com.hyjf;
+package com.hyjf.eureka;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
