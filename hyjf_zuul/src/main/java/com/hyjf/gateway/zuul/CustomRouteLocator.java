@@ -1,6 +1,7 @@
 package com.hyjf.gateway.zuul;
 
-import com.hyjf.gateway.service.IamService;
+import com.hyjf.bs.vo.GatewayApiConfigVO;
+import com.hyjf.gateway.service.BsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class CustomRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
 	public final static Logger logger = LoggerFactory.getLogger(CustomRouteLocator.class);
 	private ZuulProperties properties;
-	private IamService iamService;
+	private BsService bsService;
 	private Flag flag;
 
 	@Override
@@ -44,7 +45,7 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 		// 从application.properties中加载路由信息
 		routesMap.putAll(super.locateRoutes());
 		// 加载路由信息
-		routesMap.putAll(locateRoutesFromIAM());
+		routesMap.putAll(locateRoutesFromDB());
 		// 优化一下配置
 		LinkedHashMap<String, ZuulRoute> values = new LinkedHashMap<String, ZuulRoute>();
 		for (Map.Entry<String, ZuulRoute> entry : routesMap.entrySet()) {
@@ -64,24 +65,24 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 		return values;
 	}
 
-	private Map<String, ZuulRoute> locateRoutesFromIAM() {
-		logger.info("load zuul routes from IAM");
+	private Map<String, ZuulRoute> locateRoutesFromDB() {
+		logger.info("load zuul routes from BS");
 		Map<String, ZuulRoute> routes = new LinkedHashMap<String, ZuulRoute>();
-		List<GatewayApiConfigVO> results = iamService.findGatewayConfigs();
+		List<GatewayApiConfigVO> results = bsService.findGatewayConfigs();
 		for (GatewayApiConfigVO result : results) {
 			ZuulRoute zuulRoute = new ZuulRoute();
 			try {
 				BeanUtils.copyProperties(result, zuulRoute);
 			} catch (Exception e) {
-				logger.error("load zuul routes from IAM error", e);
+				logger.error("load zuul routes from BS error", e);
 			}
 			routes.put(zuulRoute.getPath(), zuulRoute);
 		}
 		return routes;
 	}
 
-    public void setIamService(IamService iamService) {
-        this.iamService = iamService;
+    public void setBsService(BsService bsService) {
+        this.bsService = bsService;
     }
 
     public void setFlag(Flag flag) {

@@ -1,6 +1,6 @@
 package com.hyjf.gateway.zuul;
 
-import com.hyjf.gateway.service.IamService;
+import com.hyjf.gateway.service.BsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
@@ -18,14 +18,14 @@ public class CustomZuulConfig {
 	@Autowired
 	ServerProperties server;
 	@Autowired
-	private IamService iamService;
+	private BsService bsService;
 	@Autowired
 	private Flag flag;
 
 	@Bean
 	public CustomRouteLocator routeLocator() {
 		CustomRouteLocator routeLocator = new CustomRouteLocator(this.server.getServletPrefix(), this.zuulProperties);
-		routeLocator.setIamService(iamService);
+		routeLocator.setBsService(bsService);
 		routeLocator.setFlag(flag);
 		return routeLocator;
 	}

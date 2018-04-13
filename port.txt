@@ -7,6 +7,7 @@ iam    8083
 cp     8084
 cs-iam  8085
 mc     8086
+bs 8087
 
 batch: 8099
 
