@@ -20,7 +20,7 @@ import com.hyjf.bs.vo.GatewayApiConfigVO;
  */
 
 @RestController
-@RequestMapping("/config")
+@RequestMapping("/bs/config")
 public class GatewayConfigController {
 
 	@Autowired
