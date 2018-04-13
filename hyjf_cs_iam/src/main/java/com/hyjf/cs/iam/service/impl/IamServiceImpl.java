@@ -48,7 +48,7 @@ public class IamServiceImpl implements IamService {
 		request.setStatus(searchStatus);
 		request.setUpdateStatus(updateStatus);
 
-		restTemplate.postForEntity("http://IAM/iam/user/findUserByRecommendName/", request, SmsCodeResponse.class)
+		restTemplate.postForEntity("http://IAM/iam/user/updateCheckMobileCode/", request, SmsCodeResponse.class)
 				.getBody();
 		return 1;
 	}
@@ -98,9 +98,9 @@ public class IamServiceImpl implements IamService {
 		request.setVerificationType(validCodeType);
 		request.setStatus(status);
 		request.setPlatform(platform);
-		SmsCodeResponse response = restTemplate.postForEntity("http://IAM/iam/sms/saveSmsCode", request, SmsCodeResponse.class)
+		Integer result = restTemplate.postForEntity("http://IAM/iam/sms/saveSmsCode", request, Integer.class)
 				.getBody();
-		if (response != null) {
+		if (result != null) {
 			return 1;
 		}
 		return 0;

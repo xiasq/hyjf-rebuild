@@ -19,6 +19,7 @@ import com.hyjf.common.validator.Validator;
 import com.hyjf.iam.dao.mapper.auto.*;
 import com.hyjf.iam.dao.model.auto.*;
 import com.hyjf.iam.service.UserService;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author xiasq
@@ -354,6 +355,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Users findUserByUserId(int userId) {
+        UsersExample usersExample = new UsersExample();
+        usersExample.createCriteria().andUserIdEqualTo(userId);
+        List<Users> usersList = usersMapper.selectByExample(usersExample);
+        if (!CollectionUtils.isEmpty(usersList)) {
+            return usersList.get(0);
+        }
         return null;
     }
 
@@ -390,6 +397,44 @@ public class UserServiceImpl implements UserService{
             }
         }
         return username;
+    }
+
+    @Override
+    public Account findAccountByUserId(int userId) {
+        AccountExample example = new AccountExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        List<Account> accountList = accountMapper.selectByExample(example);
+        if (!CollectionUtils.isEmpty(accountList)) {
+            return accountList.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Users findUserByMobile(String mobile) {
+        UsersExample usersExample = new UsersExample();
+        usersExample.createCriteria().andMobileEqualTo(mobile);
+        List<Users> usersList = usersMapper.selectByExample(usersExample);
+        if (!CollectionUtils.isEmpty(usersList)) {
+            return usersList.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Users findUserByRecommendName(String reffer) {
+        UsersExample usersExample = new UsersExample();
+        UsersExample.Criteria criteria = usersExample.createCriteria();
+        if (Validator.isMobile(reffer)) {
+            criteria.andMobileEqualTo(reffer);
+        } else {
+            criteria.andUserIdEqualTo(Integer.valueOf(reffer));
+        }
+        List<Users> usersList = usersMapper.selectByExample(usersExample);
+        if (!CollectionUtils.isEmpty(usersList)) {
+            return usersList.get(0);
+        }
+        return null;
     }
 
 
