@@ -7,6 +7,9 @@
     <groupId>com.hyjf</groupId>
     <artifactId>hyjf_framework</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>../hyjf_zuul</module>
+    </modules>
     <packaging>pom</packaging>
     <name>framework</name>
     <description>帮助统一管理lib~~</description>

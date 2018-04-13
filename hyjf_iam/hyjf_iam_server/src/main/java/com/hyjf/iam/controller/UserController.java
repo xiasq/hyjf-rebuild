@@ -68,19 +68,14 @@ public class UserController {
 		return userResponse;
 	}
 
-	@HystrixCommand(groupKey="IAM",
-			commandKey = "UserController.findUserByUserId",
-			commandProperties = {
-					@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
-			},
-			threadPoolProperties = {
+	@HystrixCommand(groupKey = "IAM", commandKey = "UserController.findUserByUserId", commandProperties = {
+			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000") }, threadPoolProperties = {
 					@HystrixProperty(name = "coreSize", value = "30"),
 					@HystrixProperty(name = "maxQueueSize", value = "101"),
 					@HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
 					@HystrixProperty(name = "queueSizeRejectionThreshold", value = "15"),
 					@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
-					@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1440")
-			})
+					@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1440") })
 	@RequestMapping("/findUserByUserId/{userId}")
 	public UserResponse findUserByUserId(@PathVariable int userId) {
 		UserResponse response = new UserResponse();
@@ -95,6 +90,7 @@ public class UserController {
 
 	/**
 	 * 根据userId查找account
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -112,6 +108,7 @@ public class UserController {
 
 	/**
 	 * 根据mobile查找用户
+	 * 
 	 * @param mobile
 	 * @return
 	 */
@@ -129,19 +126,20 @@ public class UserController {
 
 	/**
 	 * 检查短信验证码
+	 * 
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/updateCheckMobileCode")
 	public int updateCheckMobileCode(SmsCodeRequest request) {
-
 		String mobile = request.getMobile();
 		String verificationCode = request.getVerificationCode();
 		String verificationType = request.getVerificationType();
 		String platform = request.getPlatform();
 		Integer status = request.getStatus();
 		Integer updateStatus = request.getUpdateStatus();
-		int result = smsService.updateCheckMobileCode(mobile, verificationCode, verificationType, platform, status, updateStatus);
+		int result = smsService.updateCheckMobileCode(mobile, verificationCode, verificationType, platform, status,
+				updateStatus);
 		return result;
 	}
 
@@ -160,22 +158,5 @@ public class UserController {
 			response.setResult(userVO);
 		}
 		return response;
-	}
-
-	/**
-	 * 保存验证码
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/saveSmsCode")
-	public int saveSmsCode(SmsCodeRequest request) {
-		//String mobile, String verificationCode, String verificationType, Integer status, String platform
-		String mobile = request.getMobile();
-		String verificationCode = request.getVerificationCode();
-		String verificationType = request.getVerificationType();
-		String platform = request.getPlatform();
-		Integer status = request.getStatus();
-		int result = smsService.saveSmsCode(mobile, verificationCode, verificationType, status, platform);
-		return result;
 	}
 }

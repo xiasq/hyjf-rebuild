@@ -9,14 +9,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.hyjf.cs.iam.mq.SmsProducer;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -34,13 +34,11 @@ import com.hyjf.common.validator.Validator;
 import com.hyjf.cs.iam.constants.RegisterError;
 import com.hyjf.cs.iam.mq.CouponProducer;
 import com.hyjf.cs.iam.mq.Producer;
+import com.hyjf.cs.iam.mq.SmsProducer;
 import com.hyjf.cs.iam.service.CouponService;
 import com.hyjf.cs.iam.service.IamService;
 import com.hyjf.cs.iam.service.UserService;
 import com.hyjf.cs.iam.vo.RegisterVO;
-import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author xiasq
@@ -60,8 +58,6 @@ public class UserServiceImpl implements UserService {
 	private CouponProducer couponProducer;
 	@Autowired
 	private SmsProducer smsProducer;
-	@Autowired
-	private StringRedisTemplate redisTemplate;
 
 	@Value("${rocketMQ.topic.couponTopic}")
 	private String couponTopic;

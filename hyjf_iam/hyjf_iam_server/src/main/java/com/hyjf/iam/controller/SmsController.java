@@ -24,11 +24,8 @@ public class SmsController {
 	private SmsService smsService;
 
 	@RequestMapping(value = "/saveSmsCode", method = RequestMethod.POST)
-	public SmsCodeResponse saveSmsCode(@RequestBody @Valid SmsCodeRequest request) {
-		SmsCodeResponse response = new SmsCodeResponse();
-
-		smsService.save(request.getMobile(), request.getVerificationType(), request.getVerificationCode(),
+	public int saveSmsCode(@RequestBody @Valid SmsCodeRequest request) {
+		return smsService.save(request.getMobile(), request.getVerificationType(), request.getVerificationCode(),
 				request.getPlatform(), request.getStatus());
-		return response;
 	}
 }
