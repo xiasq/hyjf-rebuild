@@ -1,8 +1,8 @@
 spring:
   #mysql durid data source  
   datasource:
-      type: iam.alibaba.druid.pool.DruidDataSource
-      driverClassName: iam.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
       url: jdbc:mysql://123.57.155.17:3306/hyjf_online
       username: hyjf_developer
       password: QD@hyjfdev2000

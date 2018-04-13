@@ -15,7 +15,7 @@ import com.alibaba.druid.pool.DruidDataSource;
  */
 
 @Configuration
-@MapperScan("iam.hyjf.bi.dao")
+@MapperScan("com.hyjf.bi.dao")
 public class DruidDataSourceConfig {
 
 	@Bean
