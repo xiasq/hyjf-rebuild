@@ -1,8 +1,35 @@
 package com.hyjf.bs;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
 /**
  * @author xiasq
  * @version BsApplication, v0.1 2018/4/13 14:00
  */
+@SpringBootApplication
+@EnableDiscoveryClient
+@MapperScan(basePackages = { "com.hyjf.bs.dao.mapper" }, sqlSessionFactoryRef = "sqlSessionFactory")
 public class BsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BsApplication.class, args);
+	}
+
+	/**
+	 * 实例化RestTemplate，通过@LoadBalanced注解开启均衡负载能力.
+	 * 
+	 * @return restTemplate
+	 */
+	@Bean
+	@LoadBalanced
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
 }

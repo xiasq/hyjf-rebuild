@@ -4,7 +4,7 @@
 <generatorConfiguration>
 
     <!-- 引入配置文件 -->
-    <properties resource="init.properties"/>
+    <properties resource="init_bs.properties"/>
 
     <classPathEntry location="${classPath}"/>
 
@@ -121,6 +121,12 @@
             <generatedKey column="id" sqlStatement="MySql" type="post" identity="true" />
             <columnOverride column="status" javaType="java.lang.Integer" jdbcType="TINYINT" />
         </table>
+
+
+        <!-- 配置表 -->
+        <table tableName="s_gateway_api_config" domainObjectName="GatewayApiConfig">
+        </table>
+
 
     </context>
 </generatorConfiguration>
