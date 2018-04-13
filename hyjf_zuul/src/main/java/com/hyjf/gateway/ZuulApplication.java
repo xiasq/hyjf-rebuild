@@ -1,12 +1,13 @@
 package com.hyjf.gateway;
 
-import com.hyjf.gateway.filter.AccessFilter;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import com.hyjf.gateway.filter.AccessFilter;
 
 /**
  * @author xiasq
@@ -18,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 public class ZuulApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(ZuulApplication.class).web(true).run(args);
+        SpringApplication.run(ZuulApplication.class, args);
     }
 
     @Bean

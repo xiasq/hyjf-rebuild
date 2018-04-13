@@ -16,14 +16,14 @@ import javax.validation.Valid;
  */
 
 @RestController
-@RequestMapping("/sms")
+@RequestMapping("/iam/sms")
 public class SmsController {
 
 	@Autowired
 	private SmsService smsService;
 
 	@RequestMapping(value = "/saveSmsCode", method = RequestMethod.POST)
-	public int saveSmsCode(@RequestBody @Valid SmsCodeRequest request) {
+	public Integer saveSmsCode(@RequestBody @Valid SmsCodeRequest request) {
 		return smsService.save(request.getMobile(), request.getVerificationType(), request.getVerificationCode(),
 				request.getPlatform(), request.getStatus());
 	}

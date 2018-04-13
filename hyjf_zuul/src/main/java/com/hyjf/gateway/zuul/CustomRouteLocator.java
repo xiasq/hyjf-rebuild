@@ -9,6 +9,7 @@ import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties.ZuulRoute;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.LinkedHashMap;
@@ -69,23 +70,26 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 		logger.info("load zuul routes from BS");
 		Map<String, ZuulRoute> routes = new LinkedHashMap<String, ZuulRoute>();
 		List<GatewayApiConfigVO> results = bsService.findGatewayConfigs();
-		for (GatewayApiConfigVO result : results) {
-			ZuulRoute zuulRoute = new ZuulRoute();
-			try {
-				BeanUtils.copyProperties(result, zuulRoute);
-			} catch (Exception e) {
-				logger.error("load zuul routes from BS error", e);
+		if (!CollectionUtils.isEmpty(results)) {
+			for (GatewayApiConfigVO result : results) {
+				ZuulRoute zuulRoute = new ZuulRoute();
+				try {
+					BeanUtils.copyProperties(result, zuulRoute);
+				} catch (Exception e) {
+					logger.error("load zuul routes from BS error", e);
+				}
+				routes.put(zuulRoute.getPath(), zuulRoute);
 			}
-			routes.put(zuulRoute.getPath(), zuulRoute);
 		}
+
 		return routes;
 	}
 
-    public void setBsService(BsService bsService) {
-        this.bsService = bsService;
-    }
+	public void setBsService(BsService bsService) {
+		this.bsService = bsService;
+	}
 
-    public void setFlag(Flag flag) {
-        this.flag = flag;
-    }
+	public void setFlag(Flag flag) {
+		this.flag = flag;
+	}
 }

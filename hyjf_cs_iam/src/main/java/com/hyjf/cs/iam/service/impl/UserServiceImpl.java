@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.iam.request.RegisterUserRequest;
 import com.hyjf.iam.vo.UserVO;
-import com.hyjf.iam.constants.CustomConstants;
+import com.hyjf.common.constants.CustomConstants;
 import com.hyjf.common.exception.MQException;
 import com.hyjf.common.exception.ReturnMessageException;
 import com.hyjf.common.session.WebViewUser;
