@@ -7,6 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author xiasq
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableSwagger2
 @MapperScan(basePackages = { "com.hyjf.dao.mapper" }, sqlSessionFactoryRef = "sqlSessionFactory")
 public class IamApplication {
 
