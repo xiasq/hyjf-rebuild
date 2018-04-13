@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
-@MapperScan(basePackages = { "com.hyjf.dao.mapper" }, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = { "iam.hyjf.dao.mapper" }, sqlSessionFactoryRef = "sqlSessionFactory")
 public class IamApplication {
 
 	public static void main(String[] args) {

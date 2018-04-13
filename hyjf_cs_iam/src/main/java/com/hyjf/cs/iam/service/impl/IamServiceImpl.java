@@ -1,16 +1,15 @@
 package com.hyjf.cs.iam.service.impl;
 
-import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.com.request.SmsCodeRequest;
-import com.hyjf.com.response.SmsCodeResponse;
-import com.hyjf.com.response.UserResponse;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.request.RegisterUserRequest;
+import com.hyjf.iam.request.SmsCodeRequest;
+import com.hyjf.iam.response.SmsCodeResponse;
+import com.hyjf.iam.response.UserResponse;
+import com.hyjf.iam.vo.UserVO;
 import com.hyjf.cs.iam.service.IamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**

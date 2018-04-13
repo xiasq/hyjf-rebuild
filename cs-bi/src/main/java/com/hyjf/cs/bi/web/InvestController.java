@@ -2,8 +2,8 @@ package com.hyjf.cs.bi.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.bi.vo.HjhPlanVO;
-import com.hyjf.com.vo.AccountVO;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.vo.AccountVO;
+import com.hyjf.iam.vo.UserVO;
 import com.hyjf.cs.bi.request.InvestRequest;
 import com.hyjf.cs.bi.request.PublicRequest;
 import com.hyjf.cs.bi.result.InvestInfoResultVo;

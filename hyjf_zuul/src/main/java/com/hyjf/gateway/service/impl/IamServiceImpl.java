@@ -1,8 +1,5 @@
 package com.hyjf.gateway.service.impl;
 
-import com.hyjf.com.response.GatewayApiConfigResponse;
-import com.hyjf.com.response.UserResponse;
-import com.hyjf.com.vo.GatewayApiConfigVO;
 import com.hyjf.gateway.service.IamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

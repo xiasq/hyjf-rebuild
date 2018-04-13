@@ -63,7 +63,7 @@ public class QuartzConfig {
 		prop.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
 		prop.put("org.quartz.threadPool.threadCount", threadCount);
 
-		prop.put("org.quartz.dataSource.quartzDataSource.driver", "com.mysql.jdbc.Driver");
+		prop.put("org.quartz.dataSource.quartzDataSource.driver", "iam.mysql.jdbc.Driver");
 		prop.put("org.quartz.dataSource.quartzDataSource.URL", url);
 		prop.put("org.quartz.dataSource.quartzDataSource.user", user);
 		prop.put("org.quartz.dataSource.quartzDataSource.password", password);

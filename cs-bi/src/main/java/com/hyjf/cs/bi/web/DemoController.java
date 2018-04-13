@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyjf.bi.vo.HjhPlanVO;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.vo.UserVO;
 import com.hyjf.cs.bi.result.DemoResult;
 import com.hyjf.cs.bi.service.BiService;
 import com.hyjf.cs.bi.service.IamService;

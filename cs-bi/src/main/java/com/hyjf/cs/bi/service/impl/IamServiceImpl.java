@@ -1,9 +1,9 @@
 package com.hyjf.cs.bi.service.impl;
 
-import com.hyjf.com.response.AccountResponse;
-import com.hyjf.com.response.UserResponse;
-import com.hyjf.com.vo.AccountVO;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.response.AccountResponse;
+import com.hyjf.iam.response.UserResponse;
+import com.hyjf.iam.vo.AccountVO;
+import com.hyjf.iam.vo.UserVO;
 import com.hyjf.cs.bi.service.IamService;
 import io.undertow.security.idm.Account;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package com.hyjf.cs.iam.constants;
 
-import com.hyjf.common.constants.ErrorCode;
+import com.hyjf.iam.constants.ErrorCode;
 
 /**
  * @author xiasq

@@ -1,9 +1,9 @@
 package com.hyjf.cs.iam.service;
 
-import com.hyjf.com.vo.UserVO;
-import com.hyjf.common.exception.MQException;
-import com.hyjf.common.exception.ReturnMessageException;
-import com.hyjf.common.session.WebViewUser;
+import com.hyjf.iam.vo.UserVO;
+import com.hyjf.iam.exception.MQException;
+import com.hyjf.iam.exception.ReturnMessageException;
+import com.hyjf.iam.session.WebViewUser;
 import com.hyjf.cs.iam.vo.RegisterVO;
 
 import javax.servlet.http.HttpServletRequest;

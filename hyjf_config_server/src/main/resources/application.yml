@@ -6,9 +6,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/xiasq/hyjf-rebuild.git
+          uri: https://github.iam/xiasq/hyjf-rebuild.git
           searchPaths: config_files
-          username: mx2012xshq@126.com
+          username: mx2012xshq@126.iam
           password: abcd1234
 
 server:

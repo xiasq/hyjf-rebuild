@@ -1,7 +1,7 @@
 package com.hyjf.iam.service;
 
-import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.common.exception.ServiceException;
+import com.hyjf.iam.request.RegisterUserRequest;
+import com.hyjf.iam.exception.ServiceException;
 import com.hyjf.iam.dao.model.auto.Account;
 import com.hyjf.iam.dao.model.auto.Users;
 

@@ -1,7 +1,7 @@
 package com.hyjf.cs.iam.service;
 
-import com.hyjf.com.request.RegisterUserRequest;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.request.RegisterUserRequest;
+import com.hyjf.iam.vo.UserVO;
 
 /**
  * @author xiasq

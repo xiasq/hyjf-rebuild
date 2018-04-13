@@ -4,7 +4,7 @@
 package com.hyjf.cs.bi.result;
 
 import com.hyjf.bi.vo.HjhPlanVO;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.vo.UserVO;
 
 public class DemoResult extends BaseResultBean {
 

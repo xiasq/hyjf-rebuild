@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hyjf.com.vo.UserVO;
-import com.hyjf.common.exception.MQException;
+import com.hyjf.iam.vo.UserVO;
+import com.hyjf.iam.exception.MQException;
 import com.hyjf.cs.iam.constants.RegisterError;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

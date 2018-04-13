@@ -20,10 +20,10 @@ public class CustomConstants {
     /** 通讯状态描述key */
     public static final String APP_STATUS_DESC = "statusDesc";
 
-    /** 通讯状态描述 common */
+    /** 通讯状态描述 iam */
     public static final String APP_STATUS_DESC_SUCCESS = "成功";
 
-    /** 通讯状态描述 common */
+    /** 通讯状态描述 iam */
     public static final String APP_STATUS_DESC_FAIL = "失败";
 
     /** 通讯请求url key */

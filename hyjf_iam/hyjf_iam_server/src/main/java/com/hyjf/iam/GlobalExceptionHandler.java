@@ -2,15 +2,15 @@ package com.hyjf.iam;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.hyjf.com.response.Response;
-import com.hyjf.common.exception.ReturnMessageException;
+import com.hyjf.iam.response.Response;
+import com.hyjf.iam.exception.ReturnMessageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hyjf.com.vo.BaseVO;
+import com.hyjf.iam.vo.BaseVO;
 
 /**
  * @author xiasq

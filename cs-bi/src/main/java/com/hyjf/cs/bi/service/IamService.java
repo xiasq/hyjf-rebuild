@@ -1,7 +1,7 @@
 package com.hyjf.cs.bi.service;
 
-import com.hyjf.com.vo.AccountVO;
-import com.hyjf.com.vo.UserVO;
+import com.hyjf.iam.vo.AccountVO;
+import com.hyjf.iam.vo.UserVO;
 
 /**
  * @author xiasq

@@ -1,7 +1,6 @@
 package com.hyjf.iam.controller;
 
-import com.hyjf.com.request.SmsCodeRequest;
-import com.hyjf.com.response.SmsCodeResponse;
+import com.hyjf.iam.request.SmsCodeRequest;
 import com.hyjf.iam.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
