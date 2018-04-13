@@ -3,6 +3,8 @@ package com.hyjf.bs.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -22,6 +24,7 @@ import com.hyjf.bs.vo.GatewayApiConfigVO;
 @RestController
 @RequestMapping("/bs/config")
 public class GatewayConfigController {
+	private Logger logger = LoggerFactory.getLogger(GatewayConfigController.class);
 
 	@Autowired
 	private GatewayConfigService gatewayConfigService;
@@ -34,6 +37,7 @@ public class GatewayConfigController {
 	 */
 	@RequestMapping(value = "/findGatewayConfigs")
 	public GatewayApiConfigResponse findGatewayConfigs() {
+		logger.info("findGatewayConfigs start...");
 		GatewayApiConfigResponse response = new GatewayApiConfigResponse();
 
 		List<GatewayApiConfigVO> configVOs = null;

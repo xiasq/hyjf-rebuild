@@ -1,9 +1,0 @@
-basic:
-  auth:
-    username: hyjf
-    password: hyjf123
-spring:
-  http:
-    multipart:
-      maxFileSize: 2Mb
-      maxRequestSize: 2Mb

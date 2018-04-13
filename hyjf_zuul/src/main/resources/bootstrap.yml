@@ -2,18 +2,34 @@ spring:
   application:
     name: ZUUL
   cloud:
-    config:
-      uri: http://127.0.0.1:2222
-      profile: ${config.profile:DEV}
-
-eureka:
-  client:
-    serviceUrl:
+     config:
+       uri: http://127.0.0.1:2222
+       profile: ${config.profile:DEV}
+       
+server:
+  port: 18080
+  
+eureka: 
+  client: 
+    serviceUrl: 
       defaultZone: ${EUREKA.CLIENT.SERVICEURL}
   instance:
-    preferIpAddress: true
-server:
-  port: 18084
+    preferIpAddress: true     
 
-logging:
+zuul:
+  host:
+     connect-timeout-millis: 10000
+     socket-timeout-millis: 60000
+
+hystrix:
+  command:
+     default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 60000
+
+
+
+logging:  
   file: zuul.log

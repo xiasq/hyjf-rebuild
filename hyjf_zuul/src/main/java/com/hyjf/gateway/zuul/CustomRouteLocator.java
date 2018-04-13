@@ -1,5 +1,6 @@
 package com.hyjf.gateway.zuul;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.hyjf.bs.vo.GatewayApiConfigVO;
 import com.hyjf.gateway.service.BsService;
 import org.slf4j.Logger;
@@ -63,6 +64,8 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 			}
 			values.put(path, entry.getValue());
 		}
+
+		logger.info("locateRoutes is : {}", values);
 		return values;
 	}
 
