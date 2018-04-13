@@ -8,6 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 使用@EnableCircuitBreaker注解开启断路器功能
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @EnableHystrix
 @EnableHystrixDashboard
+@EnableSwagger2
 public class CsIamApplication {
 
 	/**

@@ -7,6 +7,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hyjf.com.vo.UserVO;
 import com.hyjf.common.exception.MQException;
 import com.hyjf.cs.iam.constants.RegisterError;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +27,19 @@ import com.hyjf.cs.iam.vo.RegisterVO;
 
 @RestController
 @RequestMapping("/api/user")
+@Api(value = "用户相关")
 public class UserController {
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/sendcode", produces = "application/json; charset=utf-8")
+	@ApiOperation(value = "发送短信", notes = "用户注册发送短信")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "validCodeType", value = "验证码类型", required = true, dataType = "String"),
+			@ApiImplicitParam(name = "mobile", value = "手机号码", required = true, dataType = "String"),
+	})
+	@PostMapping(value = "/sendcode", produces = "application/json; charset=utf-8")
 	public BaseResultBean sendSmsCode(@RequestParam String validCodeType, @RequestParam String mobile,
 			HttpServletRequest request) throws MQException {
 		logger.info("sendSmsCode start, validCodeType is :{}, mobile is: {}", validCodeType, mobile);
@@ -44,6 +54,8 @@ public class UserController {
 	 * @param registerVO
 	 * @return
 	 */
+	@ApiOperation(value = "注册", notes = "用户注册")
+	@ApiImplicitParam(name = "registerVO", value = "注册实体vo", required = true, dataType = "RegisterVO")
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public BaseResultBean register(@RequestBody @Valid RegisterVO registerVO) {
 		logger.info("register start, registerVO is :{}", JSONObject.toJSONString(registerVO));
@@ -52,7 +64,7 @@ public class UserController {
 		UserVO userVO = userService.register(registerVO);
 
 		if (userVO != null) {
-			logger.info("register success, userId is :{]", userVO.getUserId());
+			logger.info("register success, userId is :{}", userVO.getUserId());
 		} else {
 			logger.error("register failed...");
 			resultBean.setStatus("1");
