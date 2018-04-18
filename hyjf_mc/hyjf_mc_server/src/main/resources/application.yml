@@ -1,8 +1,12 @@
 spring:
-  redis: 
+  #mongodb
+  data:
+    mongodb:
+      uri: mongodb://testuser:e2VdOav40i@39.106.9.158:28001/test
+  redis:
     database: 0  
     # Redis服务器地址
-    hostName: 123.57.155.17
+    hostName: 101.200.36.143
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）

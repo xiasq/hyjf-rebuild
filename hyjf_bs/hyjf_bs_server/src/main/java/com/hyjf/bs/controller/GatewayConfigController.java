@@ -48,6 +48,7 @@ public class GatewayConfigController {
 			for (GatewayApiConfig config : configs) {
 				vo = new GatewayApiConfigVO();
 				BeanUtils.copyProperties(config, vo);
+				vo.setId(String.valueOf(config.getId()));
 				configVOs.add(vo);
 			}
 		}

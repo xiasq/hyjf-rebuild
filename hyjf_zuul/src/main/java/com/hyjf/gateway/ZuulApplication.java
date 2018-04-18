@@ -28,8 +28,8 @@ public class ZuulApplication {
         return new RestTemplate();
     }
 
-    //@Bean
-    //public AccessFilter accessFilter() {
-//        return new AccessFilter();
-//    }
+    @Bean
+    public AccessFilter accessFilter() {
+        return new AccessFilter();
+    }
 }

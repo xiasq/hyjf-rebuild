@@ -22,6 +22,7 @@ public abstract class Consumer {
         defaultMQPushConsumer = new DefaultMQPushConsumer();
         defaultMQPushConsumer.setInstanceName(String.valueOf(System.currentTimeMillis()));
         defaultMQPushConsumer.setNamesrvAddr(namesrvAddr);
+        defaultMQPushConsumer.setVipChannelEnabled(false);
         init(defaultMQPushConsumer);
     }
 

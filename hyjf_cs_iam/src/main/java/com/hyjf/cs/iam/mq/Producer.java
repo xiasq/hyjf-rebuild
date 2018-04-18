@@ -34,6 +34,7 @@ public abstract class Producer {
 	protected void init() throws MQClientException {
 		defaultMQProducer = new DefaultMQProducer();
 		defaultMQProducer.setNamesrvAddr(namesrvAddr);
+		defaultMQProducer.setVipChannelEnabled(false);
 		String group;
 		ProducerFieldsWrapper fieldsWrapper = getFieldsWrapper();
 		if (fieldsWrapper == null) {
